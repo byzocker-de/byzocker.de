@@ -1,0 +1,110 @@
+---
+---
+
+<div class="wrapper">
+    <div class="wrapperwrapper">
+        <div class="topTobi">
+            hey, i'm
+            <span>
+                <span id="nameTobi" class="nameTobi"> tobi</span>
+                <span class="nameWaving"> 👋</span>
+            </span>
+        </div>
+        <div class="bottomText">
+            i'm from germany and i like tinkering with tech.
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --white: rgb(240, 226, 186);
+        --blue: rgb(155, 153, 253);
+        --pink: rgb(255, 157, 173);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30em;
+    }
+    div {
+        animation: init 1s;
+    }
+    .wrapper{
+        /* not used for now */
+        /* background: 
+            rgba(0, 0, 0, 0.459)
+            url(https://raw.githubusercontent.com/byzocker-de/byzocker.de/master/src/background.png)
+            center center/cover no-repeat;
+        background-blend-mode: multiply;
+        border: 1px solid #ffffff5b; */
+    }
+    .wrapper {
+        width: 20em;
+        font-size: x-large;
+        font-weight: 400;
+        border-radius: 15px;
+    }
+    .wrapperwrapper {
+        padding: 1em;
+    }
+    .topTobi {
+        padding-bottom: 0.5em;
+        font-size: 1.5em;
+    }
+    .nameTobi {
+        font-weight: 700;
+        background: linear-gradient(
+            45deg,
+            var(--white),
+            var(--blue),
+            var(--pink),
+            var(--white)
+        );
+        background-size: 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: background-pan 2.5s linear infinite;
+    }
+    .nameWaving {
+        display: inline-block;
+        animation: waving 1s infinite;
+    }
+    .bottomText {
+        font-weight: 40;
+    }
+    @keyframes init {
+        0% {
+            opacity: 0;
+            transform: translateY(100%);
+            filter: brightness(0%);
+        }
+        50% {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+        100% {
+            filter: brightness(100%);
+        }
+    }
+    @keyframes waving {
+        0% {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(-20deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    @keyframes background-pan {
+        from {
+            background-position: 0% center;
+        }
+
+        to {
+            background-position: -200% center;
+        }
+    }
+</style>
