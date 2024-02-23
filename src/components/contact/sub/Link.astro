@@ -67,22 +67,31 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
 
  <li class="link-card">
 	<a href="#">
+        <img src={ iconPath } class="icon">
 		<h2>
-			title
+			{ platformName }
 			<span>&rarr;</span>
 		</h2>
 		<p>
-			body
+			{ description }
 		</p>
 	</a>
 </li>
 <style>
+    :root{
+        --icon-size: 10px;
+    }
+    .icon{
+        width:  var(--icon-size);
+        height: var(--icon-size) ;
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(40deg) brightness(111%) contrast(103%);
+    }
 	.link-card {
 		list-style: none;
 		display: flex;
 		padding: 0.25rem;
         margin: .2rem;
-		background-color: white;
+		background-color: black;
 		background-image: none;
 		background-size: 400%;
 		border-radius: 0.6rem;
@@ -98,7 +107,7 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
 		padding: 1rem 1.3rem;
 		border-radius: 0.35rem;
 		color: #111;
-		background-color: white;
+		background-color: black;
 		opacity: 0.8;
 	}
 	h2 {
@@ -109,7 +118,7 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
 	p {
 		margin-top: 0.5rem;
 		margin-bottom: 0;
-		color: #444;
+		color: #cacaca;
 	}
 	.link-card:is(:hover, :focus-within) {
 		background-position: 0;
@@ -118,7 +127,7 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
 	}
 	.link-card:is(:hover, :focus-within) h2 {
 		/* color: rgb(var(--accent)); */
-        color: red
+        color: rgb(0, 255, 76)
 	}
 </style>
 
