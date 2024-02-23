@@ -1,0 +1,73 @@
+---
+import Link from "./sub/Link.astro";
+import InstagramSVG from "./sub/icons/instagram.svg"
+---
+<div class="overviewDiv">
+    <span class="overviewItems">
+        <!-- This is where you can reach out to me <br> -->
+        <!-- https://www.svgrepo.com/vectors/ -->
+        <Link
+        platformName="Instagram Test"
+        platformLink="https://instagram.com"
+        description="Instagram Test Description"
+        iconPath={ InstagramSVG }
+        boxBackground="red"
+        />
+        <Link
+        platformName="Instagram Test"
+        platformLink="https://instagram.com"
+        description="Instagram Test Description"
+        iconPath={ InstagramSVG }
+        boxBackground="red"
+        />
+        <Link
+        platformName="Instagram Test"
+        platformLink="https://instagram.com"
+        description="Instagram Test Description"
+        iconPath={ InstagramSVG }
+        boxBackground="red"
+        />
+        <Link
+        platformName="Instagram Test"
+        platformLink="https://instagram.com"
+        description="Instagram Test Description"
+        iconPath={ InstagramSVG }
+        boxBackground="red"
+        />
+        <Link
+        platformName="Instagram Test"
+        platformLink="https://instagram.com"
+        description="Instagram Test Description"
+        iconPath={ InstagramSVG }
+        boxBackground="red"
+        />
+        <Link
+        platformName="Instagram Test"
+        platformLink="https://instagram.com"
+        description="Instagram Test Description"
+        iconPath={ InstagramSVG }
+        boxBackground="red"
+        />  
+    </span>
+</div>
+
+<style>
+    .overviewDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: blue;
+        height: 500px;
+
+
+    }
+    .overviewItems{
+        border: 2px solid white;
+        border-radius: 20px;
+        display: grid;
+        /* grid-template-rows: 100px 100px 100px; */
+        box-sizing: border-box;
+        grid-template-columns: 30vh 30vh 30vh;
+        grid-template-rows: auto;
+    }
+</style>

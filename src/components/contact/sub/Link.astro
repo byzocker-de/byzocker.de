@@ -1,0 +1,77 @@
+---
+
+const { iconPath, boxBackground, platformName, platformLink, description } = Astro.props;
+const iconSize= "10px"
+---
+
+
+
+
+<a href="#">
+    <div class="outer">
+        <span class="inner">
+            <div>
+                <span class="spanimg">
+                    <img src={ iconPath } class="icon">
+                </span>
+                <span class="platformTitle">
+                    TestTestTest
+                </span>
+            </div>
+            <div>
+                Description
+            </div>
+        </span>
+    </div>
+</a>
+
+
+
+
+<style>
+    :root{
+        --icon-size: 50px;
+        --background-color: { boxBackground }
+    }
+    a, a:link, a:visited, a:active{
+        text-decoration: none;
+        color: inherit;
+    }
+    .debug{
+        display: inline;
+        background: white;
+        color: black;
+    }
+    .outer{
+        border: 5px solid green;
+        border-radius: 10px;
+        background-color: red;
+        margin: 5px;
+    }
+    .inner{
+        background-color: pink;
+
+        
+    }
+    .icon{
+        width:  var(--icon-size);
+        height: var(--icon-size) ;
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(40deg) brightness(111%) contrast(103%);
+    }
+</style>
+
+
+
+
+
+
+
+
+<!-- <div class="debug">
+    <br><br><br><br>
+    Icon Path: { iconPath } <br>
+    Box Background: { boxBackground } <br>
+    Platform Name: { platformName } <br>
+    Platform Link: { platformLink } <br>
+    Description: { description } <br>
+</div> -->
