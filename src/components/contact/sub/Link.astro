@@ -1,6 +1,6 @@
 ---
 
-const { iconPath, boxBackground, platformName, platformLink, description } = Astro.props;
+const { iconPath, boxBackground, platformName, platformLink, platformColor, description } = Astro.props;
 ---
 
 <!-- 
@@ -70,16 +70,17 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
         <img src={ iconPath } class="icon">
 		<h2>
 			{ platformName }
-			<span>&rarr;</span>
+			<!-- <span>&rarr;</span> -->
 		</h2>
 		<p>
 			{ description }
 		</p>
 	</a>
 </li>
-<style>
+<style define:vars={{ boxBackground, platformColor }}>
     :root{
-        --icon-size: 10px;
+        --icon-size: 35px;
+        /* --backgroundPlatformColor: color-mix(in srgb, var(--platformColor) 80%, white); */
     }
     .icon{
         width:  var(--icon-size);
@@ -88,6 +89,7 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
     }
 	.link-card {
 		list-style: none;
+        transition: color 1s cubic-bezier(0.22, 1, 0.36, 1);
 		display: flex;
 		padding: 0.25rem;
         margin: .2rem;
@@ -96,8 +98,8 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
 		background-size: 400%;
 		border-radius: 0.6rem;
 		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+		transition: background-position 1s cubic-bezier(0.22, 1, 0.36, 1);
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.164), 0 2px 4px -2prgba(0, 0, 0, 0.178)1);
 	}
 
 	.link-card > a {
@@ -105,30 +107,65 @@ const { iconPath, boxBackground, platformName, platformLink, description } = Ast
 		text-decoration: none;
 		line-height: 1.4;
 		padding: 1rem 1.3rem;
+  
 		border-radius: 0.35rem;
-		color: #111;
-		background-color: black;
+		color: #ffffff;
+		background-color: rgba(0, 0, 0, 0.226);
 		opacity: 0.8;
 	}
 	h2 {
 		margin: 0;
 		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+		transition: color 1s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	p {
 		margin-top: 0.5rem;
 		margin-bottom: 0;
 		color: #cacaca;
+        transition: color 1s cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	.link-card:is(:hover, :focus-within) {
+    .link-card:is(:hover) p{
+        color: white;
+    }
+	.link-card:is(:hover) {
 		background-position: 0;
 		/* background-image: var(--accent-gradient); */
-        background-image: linear-gradient(blue, red);
+        /* background-image: linear-gradient(var(--platformColor) , rgba(0, 0, 0, 0.616)); */
 	}
-	.link-card:is(:hover, :focus-within) h2 {
+	.link-card:is(:hover) h2 {
 		/* color: rgb(var(--accent)); */
-        color: rgb(0, 255, 76)
+        /* color: var(--platformColor) */
+        /* background: linear-gradient(var(--platformColor), white);
+        background-clip: text;
+        -webkit-text-fill-color: transparent; */
+        color: white;
 	}
+
+
+    .link-card:is(:hover) {
+        background: linear-gradient(45deg, color-mix(in srgb, var(--platformColor) 30%, black), color-mix(in srgb, var(--platformColor) 50%, black));
+        background-size: 400% 400%;
+
+        -webkit-animation: bg-anim 2.5s ease infinite;
+        -moz-animation: bg-anim 2.5s ease infinite;
+        animation: bg-anim 2.5s ease infinite;
+    }
+
+    @-webkit-keyframes bg-anim {
+        0%{background-position:72% 0%}
+        50%{background-position:29% 100%}
+        100%{background-position:72% 0%}
+    }
+    @-moz-keyframes bg-anim {
+        0%{background-position:72% 0%}
+        50%{background-position:29% 100%}
+        100%{background-position:72% 0%}
+    }
+    @keyframes bg-anim {
+        0%{background-position:72% 0%}
+        50%{background-position:29% 100%}
+        100%{background-position:72% 0%}
+    }
 </style>
 
 
