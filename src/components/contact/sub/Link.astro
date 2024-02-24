@@ -143,12 +143,17 @@ const { iconPath, boxBackground, platformName, platformLink, platformColor, desc
 
 
     .link-card:is(:hover) {
-        background: linear-gradient(45deg, color-mix(in srgb, var(--platformColor) 30%, black), color-mix(in srgb, var(--platformColor) 50%, black));
+        background: linear-gradient(
+            210deg,
+            color-mix(in srgb, var(--platformColor) 20%, color-mix(in srgb, black 80%, white) ),
+            color-mix(in srgb, var(--platformColor) 20%, black)
+            );
         background-size: 400% 400%;
 
-        -webkit-animation: bg-anim 2.5s ease infinite;
-        -moz-animation: bg-anim 2.5s ease infinite;
-        animation: bg-anim 2.5s ease infinite;
+        -webkit-animation: bg-anim 5s ease infinite;
+        -moz-animation: bg-anim 5s ease infinite;
+        animation: bg-anim 5s ease infinite;
+        transition: 10s;
     }
 
     @-webkit-keyframes bg-anim {
