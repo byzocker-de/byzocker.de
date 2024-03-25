@@ -1,0 +1,50 @@
+---
+const idDiscord = "322035497826385920";
+const lanyard = await fetch('https://api.lanyard.rest/v1/users/'+idDiscord);
+const discord = await lanyard.json()
+
+const spotify = {
+    title: discord.data.spotify.song,
+    artist: discord.data.spotify.artist
+}
+---
+<!-- <script src="https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js"></script> -->
+<!-- 322035497826385920 -->
+
+<html>
+    
+    <div>
+        <!-- <Lanyard
+            discordId={discordId}
+        /> -->
+        <h1 class="BigTextH1">
+            byzocker
+        </h1><br>
+        <span>
+            { spotify.artist } - { spotify.title } 
+        </span><br>
+        <span class="logos">
+            <a href="#">
+                <img src="/icons/github.svg" alt="" width="50px">
+            </a>
+        </span>
+    </div>
+    <style>
+        img{
+            filter: invert(100%) sepia(91%) saturate(38%) hue-rotate(321deg) brightness(110%) contrast(110%);
+        }
+        :root{
+            text-align: center;
+        }
+        .BigTextH1{
+            font-size: 100px;
+        }
+    </style>
+
+</html>
+
+
+
+<script>
+    
+</script>
