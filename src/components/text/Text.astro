@@ -6,6 +6,7 @@ const discord = await lanyard.json();
 const spotify = {
     title: discord.data.spotify.song,
     artist: discord.data.spotify.artist,
+    link: "https://open.spotify.com/track/" +discord.data.spotify.track_id
 };
 ---
 
@@ -20,9 +21,9 @@ const spotify = {
             </div>
             <div class="divTableRow">
                 <div class="divTableCell">
-                    <span>
+                    <a href={spotify.link}>
                         {spotify.artist} - {spotify.title}
-                    </span>
+                    </a>
                 </div>
             </div>
             <br />
