@@ -1,50 +1,88 @@
 ---
 const idDiscord = "322035497826385920";
-const lanyard = await fetch('https://api.lanyard.rest/v1/users/'+idDiscord);
-const discord = await lanyard.json()
+const lanyard = await fetch("https://api.lanyard.rest/v1/users/" + idDiscord);
+const discord = await lanyard.json();
 
 const spotify = {
     title: discord.data.spotify.song,
-    artist: discord.data.spotify.artist
-}
+    artist: discord.data.spotify.artist,
+};
 ---
-<!-- <script src="https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js"></script> -->
-<!-- 322035497826385920 -->
 
+<!-- <script src="https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js"></script> --><!-- 322035497826385920 -->
 <html>
-    
-    <div>
-        <!-- <Lanyard
-            discordId={discordId}
-        /> -->
-        <h1 class="BigTextH1">
-            byzocker
-        </h1><br>
-        <span>
-            { spotify.artist } - { spotify.title } 
-        </span><br>
-        <span class="logos">
-            <a href="#">
-                <img src="/icons/github.svg" alt="" width="50px">
-            </a>
-        </span>
+
+    <div class="divTable textTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    <h1 class="BigTextH1">byzocker</h1>
+                </div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    <span>
+                        {spotify.artist} - {spotify.title}
+                    </span>
+                </div>
+            </div> <br>
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <a href="#">
+                                <img
+                                    src="/icons/github.svg"
+                                    alt=""
+                                    width="50px"
+                                />
+                            </a>
+                        </div>
+                        <div class="divTableCell">cell2_1</div>
+                        <div class="divTableCell">cell3_1</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">cell1_2</div>
+                        <div class="divTableCell">cell2_2</div>
+                        <div class="divTableCell">cell3_2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <style>
-        img{
-            filter: invert(100%) sepia(91%) saturate(38%) hue-rotate(321deg) brightness(110%) contrast(110%);
+        div.textTable {
+            border-collapse: collapse;
         }
-        :root{
+        /* DivTable.com */
+        .divTable {
+            display: table;
+        }
+        .divTableRow {
+            display: table-row;
+        }
+
+        .divTableCell {
+            display: table-cell;
+        }
+        .divTableBody {
+            display: table-row-group;
+        }
+    </style>
+
+    <style>
+        img {
+            filter: invert(100%) sepia(91%) saturate(38%) hue-rotate(321deg)
+                brightness(110%) contrast(110%);
+        }
+        /* :root {
             text-align: center;
-        }
-        .BigTextH1{
+        } */
+        .BigTextH1 {
             font-size: 100px;
         }
     </style>
 
+    <script></script>
+
 </html>
-
-
-
-<script>
-    
-</script>
