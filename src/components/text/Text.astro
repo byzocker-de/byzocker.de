@@ -8,9 +8,6 @@ const spotify = {
     artist: discord.data.spotify.artist,
     link: "https://open.spotify.com/track/" + discord.data.spotify.track_id,
 };
-const dc = {
-    pfp: "https://lanyard.rest/" + idDiscord + ".png",
-}
 
 import Icon from "./icons/Icon.astro";
 ---
@@ -27,44 +24,62 @@ import Icon from "./icons/Icon.astro";
                 <div class="divTableRow">
                     <div class="divTableCell">
                         <a href={spotify.link}>
-                            {spotify.artist} - {spotify.title}
+                            ♫ {spotify.artist} - {spotify.title}
+                            <!-- currently not listening to anything... -->
                         </a>
                     </div>
                 </div>
                 <div class="divTableRow">
                     <div class="divTableCell">
-                        <div class="divTableRow">
+                        <div class="divTableRow iconRow">
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon link="https://github.com" source="/icons/github.svg"/>
+                                <Icon
+                                    link="https://github.com"
+                                    source="/icons/github.svg"
+                                />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon link="#" source="/icons/github.svg"/>
+                                <Icon
+                                    link="#"
+                                    source="/icons/github.svg"
+                                />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon link="#" source="/icons/github.svg"/>
+                                <Icon
+                                    link="#"
+                                    source="/icons/github.svg"
+                                />
                             </div>
                         </div>
-                        <div class="divTableRow">
+                        <div class="divTableRow iconRow">
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon link="#" source="/icons/github.svg"/>
+                                <Icon
+                                    link="#"
+                                    source="/icons/github.svg"
+                                />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon link="#" source="/icons/github.svg"/>
+                                <Icon
+                                    link="#"
+                                    source="/icons/github.svg"
+                                />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon link="#" source="/icons/github.svg"/>
+                                <Icon
+                                    link="#"
+                                    source="/icons/github.svg"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <style>
@@ -85,18 +100,21 @@ import Icon from "./icons/Icon.astro";
         .divTableBody {
             display: table-row-group;
         }
-    </style>
-
-    <style>
-        /* :root {
-            text-align: center;
-        } */
-        .BigTextH1 {
-            font-size: 100px;
+        .divTable.textTable .divTableCell{
+            padding: 10px 10px;
         }
     </style>
 
     <script></script>
 
+    <style>
+        /* :root {
+        text-align: center;
+    } */
+        .BigTextH1 {
+            font-size: 100px;
+            font-weight: bold;
+        }
+    </style>
 
 </html>
