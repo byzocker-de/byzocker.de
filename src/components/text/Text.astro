@@ -1,0 +1,185 @@
+---
+import Icon from "./icons/Icon.astro";
+---
+
+<html>
+    <p id="test23"></p>
+    <!-- <p>{ spotify.is_listening }</p> -->
+    <div class="divTable textTable crt">
+        <div class="divTableBody">
+            <div class="divTableCell">
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        <div class="BigTextH1">byzocker</div>
+                    </div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        <a id="spotifyText">
+                            loading...
+                            <!-- ♫ {spotify.artist} - {spotify.title} -->
+                            <!-- currently not listening to anything... -->
+                        </a>
+                    </div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell">
+                        <div class="divTableRow iconRow">
+                            <!-- Steam -->
+                            <div class="divTableCell">
+                                <Icon
+                                    link="https://steamcommunity.com/id/byzocker"
+                                    source="/icons/steam.svg"
+                                    imgsize="50px"
+                                />
+                            </div>
+                            <!-- YouTube -->
+                            <div class="divTableCell">
+                                <Icon
+                                    link="https://youtube.com/@byzockerr"
+                                    source="/icons/youtube.svg"
+                                    imgsize="50px"
+                                />
+                            </div>
+                            <!-- Instagram -->
+                            <div class="divTableCell">
+                                <Icon
+                                    link="https://instagram.com/byzocker"
+                                    source="/icons/instagram.svg"
+                                    imgsize="50px"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="divTableRow iconRow">
+                            <!-- Your-Spotify  -->
+                            <div class="divTableCell blackIcon">
+                                <Icon
+                                    link="https://spotify.byzocker.de/?gname=Last+week&token=9ae37424-3f7d-454e-bbb3-a9cc0f78eb95"
+                                    source="/icons/your-spotify.svg"
+                                    imgsize="50px"
+                                />
+                            </div>
+                            <!-- Spotify -->
+                            <div class="divTableCell">
+                                <Icon
+                                    link="https://open.spotify.com/user/21fnqjzsgtwz3vf4cethlrezq?si=962d341e70534c45"
+                                    source="/icons/spotify.svg"
+                                    imgsize="50px"
+                                    class="test"
+                                />
+                            </div>
+                            <!-- Soundcloud -->
+                            <div class="divTableCell">
+                                <Icon
+                                    link="https://soundcloud.com/byzocker"
+                                    source="/icons/soundcloud.svg"
+                                    imgsize="50px"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        div.textTable {
+            border-collapse: collapse;
+        }
+        /* DivTable.com */
+        .divTable {
+            display: table;
+        }
+        .divTableRow {
+            display: table-row;
+        }
+
+        .divTableCell {
+            display: table-cell;
+        }
+        .divTableBody {
+            display: table-row-group;
+        }
+        .divTable.textTable .divTableCell {
+            padding: 5px 5px;
+        }
+    </style>
+
+    <script></script>
+
+    <style>
+        /* :root {
+        text-align: center;
+    } */
+        .BigTextH1 {
+            font-size: 150px;
+            font-weight: bold;
+        }
+        a:active,
+        a:hover,
+        a:link,
+        a:visited {
+            color: inherit;
+            text-decoration: none;
+            cursor: default;
+        }
+        .spotLinkActive:hover {
+            text-decoration: underline white;
+            cursor: pointer;
+        }
+        .divTable {
+            /* transform: rotate(353deg) translate(0px, 0px) skew(-4deg, 0deg); */
+            transform-origin: 52% 57%;
+            transform: rotate(-5deg) skew(-5deg, -2deg);
+        }
+        @media only screen and (max-width: 750px) {
+            .BigTextH1 {
+                font-size: 8vh;
+            }
+        }
+    </style>
+
+    <script>
+        const userId = "322035497826385920";
+        const lanyardUrl = "https://api.lanyard.rest/v1/users/" + userId;
+        const spotifyT = document.getElementById(
+            "spotifyText"
+        ) as HTMLAnchorElement;
+
+        async function fetchDiscordPresence() {
+            try {
+                const response = await fetch(lanyardUrl);
+                const lanyardjson = await response.json();
+                const lanyard = lanyardjson.data;
+
+                if (lanyard.listening_to_spotify == true) {
+                    const spotify = {
+                        title: lanyard.spotify.song,
+                        artist: lanyard.spotify.artist,
+                        link:
+                            "https://open.spotify.com/track/" +
+                            lanyard.spotify.track_id,
+                    };
+
+                    spotifyT.textContent =
+                        "♫ " + spotify.artist + " - " + spotify.title;
+                    spotifyT.href = spotify.link;
+                    spotifyT.classList.add("spotLinkActive");
+                } else {
+                    spotifyT.textContent = " ";
+                    spotifyT.classList.remove("spotLinkActive");
+                    spotifyT.removeAttribute("href");
+                }
+            } catch (error) {
+                spotifyT.textContent = "Error";
+                spotifyT.removeAttribute("href");
+                spotifyT.classList.remove("spotLinkActive");
+            }
+        }
+
+        setInterval(fetchDiscordPresence, 1000);
+    </script>
+
+
+</html>

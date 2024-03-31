@@ -1,27 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import About from "../components/About.astro";
+import Main from "../components/Main.astro";
 ---
 
-<Layout
+<!-- <Layout
   title="byzocker.de"
   description="hey."
   image="https://i.imgur.com/HzBwcsH.jpg"
   url="https://byzocker.de"
   favico="favicon.svg"
+> -->
+<Layout
+  title="byzocker.de"
+  description="hey."
+  image=""
+  url="https://byzocker.de"
+  favico="favicon.ico"
 >
   <main>
-    <About />
+    <!-- https://bddvlpr.com/ -->
+    <!-- <About /> -->
+    <Main/>
   </main>
-  <footer
-    class="footerr"
-    style=" position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            opacity: 0.1;
-            text-align: center;"
-  >
-    <a href="/contact">Contact Me</a>
-  </footer>
+
 </Layout>

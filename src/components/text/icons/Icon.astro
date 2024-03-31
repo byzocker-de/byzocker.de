@@ -1,0 +1,14 @@
+---
+const { link, source, imgsize, bw } = Astro.props;
+---
+
+<a href={link}>
+    <img src={source} alt="" width={imgsize} id="icon" class="white" />
+</a>
+<style>
+    .white {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(3deg)
+            brightness(100%) contrast(100%);
+    }
+
+</style>
