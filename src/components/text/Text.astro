@@ -1,18 +1,23 @@
 ---
-const idDiscord = "322035497826385920";
-const lanyard = await fetch("https://api.lanyard.rest/v1/users/" + idDiscord);
-const discord = await lanyard.json();
 
-const spotify = {
-    title: discord.data.spotify.song,
-    artist: discord.data.spotify.artist,
-    link: "https://open.spotify.com/track/" + discord.data.spotify.track_id,
-};
+// const lanyard = await fetch("https://api.lanyard.rest/v1/users/" + idDiscord);
+// const discord = await lanyard.json();
+
+// const spotify = {
+//     is_listening: discord.data.listening_to_spotify,
+//     title: discord.data.spotify.song,
+//     artist: discord.data.spotify.artist,
+//     link: "https://open.spotify.com/track/" + discord.data.spotify.track_id,
+// };
+
+// switch (){}
 
 import Icon from "./icons/Icon.astro";
 ---
 
 <html>
+    <p id="test23"></p>
+    <!-- <p>{ spotify.is_listening }</p> -->
     <div class="divTable textTable">
         <div class="divTableBody">
             <div class="divTableCell">
@@ -23,8 +28,9 @@ import Icon from "./icons/Icon.astro";
                 </div>
                 <div class="divTableRow">
                     <div class="divTableCell">
-                        <a href={spotify.link}>
-                            ♫ {spotify.artist} - {spotify.title}
+                        <a href="#" id="spotifyText">
+                            loading...
+                            <!-- ♫ {spotify.artist} - {spotify.title} -->
                             <!-- currently not listening to anything... -->
                         </a>
                     </div>
@@ -41,40 +47,25 @@ import Icon from "./icons/Icon.astro";
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon
-                                    link="#"
-                                    source="/icons/github.svg"
-                                />
+                                <Icon link="#" source="/icons/github.svg" />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon
-                                    link="#"
-                                    source="/icons/github.svg"
-                                />
+                                <Icon link="#" source="/icons/github.svg" />
                             </div>
                         </div>
                         <div class="divTableRow iconRow">
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon
-                                    link="#"
-                                    source="/icons/github.svg"
-                                />
+                                <Icon link="#" source="/icons/github.svg" />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon
-                                    link="#"
-                                    source="/icons/github.svg"
-                                />
+                                <Icon link="#" source="/icons/github.svg" />
                             </div>
                             <!-- Github -->
                             <div class="divTableCell">
-                                <Icon
-                                    link="#"
-                                    source="/icons/github.svg"
-                                />
+                                <Icon link="#" source="/icons/github.svg" />
                             </div>
                         </div>
                     </div>
@@ -100,8 +91,8 @@ import Icon from "./icons/Icon.astro";
         .divTableBody {
             display: table-row-group;
         }
-        .divTable.textTable .divTableCell{
-            padding: 10px 10px;
+        .divTable.textTable .divTableCell {
+            padding: 5px 5px;
         }
     </style>
 
@@ -117,4 +108,41 @@ import Icon from "./icons/Icon.astro";
         }
     </style>
 
+
+
+    <script>
+        const idDiscord = "322035497826385920";
+        const lanyardUrl = "https://api.lanyard.rest/v1/users/" + idDiscord;
+        const spotifyT = document.getElementById("spotifyText") as HTMLAnchorElement;
+
+        async function fetchDiscordPresence() {
+            try {
+                const response = await fetch(lanyardUrl);
+                const lanyard = await response.json();
+                const data = lanyard.data
+
+                if (data.listening_to_spotify == true) {
+                    const spotify = {
+                        title: data.spotify.song,
+                        artist: data.spotify.artist,
+                        link:
+                            "https://open.spotify.com/track/" +
+                            data.spotify.track_id,
+                    };
+
+                    spotifyT.textContent = "♫ " + spotify.artist + " - " + spotify.title;
+                    spotifyT.href = spotify.link;
+                } else {
+                    spotifyT.textContent =
+                        "currently not listening to anything...";
+                    spotifyT.href = ""
+                }
+            } catch (error) {
+                spotifyT.textContent = "Error";
+                spotifyT.href = "#"
+            }
+        }
+        
+        setInterval(fetchDiscordPresence, 1000);
+    </script>
 </html>
