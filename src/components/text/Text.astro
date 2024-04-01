@@ -3,8 +3,7 @@ import Icon from "./icons/Icon.astro";
 ---
 
 <html>
-    <p id="test23"></p>
-    <!-- <p>{ spotify.is_listening }</p> -->
+    <p id="test"></p>
     <div class="divTable textTable crt">
         <div class="divTableBody">
             <div class="divTableCell">
@@ -66,7 +65,6 @@ import Icon from "./icons/Icon.astro";
                                     link="https://open.spotify.com/user/21fnqjzsgtwz3vf4cethlrezq?si=962d341e70534c45"
                                     source="/icons/spotify.svg"
                                     imgsize="50px"
-                                    class="test"
                                 />
                             </div>
                             <!-- Soundcloud -->
@@ -109,9 +107,6 @@ import Icon from "./icons/Icon.astro";
     <script></script>
 
     <style>
-        /* :root {
-        text-align: center;
-    } */
         .BigTextH1 {
             font-size: 150px;
             font-weight: bold;
@@ -129,7 +124,6 @@ import Icon from "./icons/Icon.astro";
             cursor: pointer;
         }
         .divTable {
-            /* transform: rotate(353deg) translate(0px, 0px) skew(-4deg, 0deg); */
             transform-origin: 52% 57%;
             transform: rotate(-5deg) skew(-5deg, -2deg);
         }
@@ -141,44 +135,90 @@ import Icon from "./icons/Icon.astro";
     </style>
 
     <script>
+        // 
+        import dayjs from 'dayjs';
+        import relativeTime from 'dayjs/plugin/relativeTime';
+        import UpdateLocale from 'dayjs/plugin/updateLocale';
+
+        //
+        dayjs.extend(relativeTime);
+        dayjs.extend(UpdateLocale);
+        // 
         const userId = "322035497826385920";
         const lanyardUrl = "https://api.lanyard.rest/v1/users/" + userId;
-        const spotifyT = document.getElementById(
+        const activitiesT = document.getElementById(
             "spotifyText"
         ) as HTMLAnchorElement;
 
+        // 
         async function fetchDiscordPresence() {
             try {
                 const response = await fetch(lanyardUrl);
                 const lanyardjson = await response.json();
                 const lanyard = lanyardjson.data;
+                const logspotify = (value) =>
+                    console.log("detected listening \n'" + value + "'");
+                const logactivity = (value) =>
+                    console.log("detected activity \n'" + value + "'");
 
-                if (lanyard.listening_to_spotify == true) {
-                    const spotify = {
-                        title: lanyard.spotify.song,
-                        artist: lanyard.spotify.artist,
-                        link:
-                            "https://open.spotify.com/track/" +
-                            lanyard.spotify.track_id,
-                    };
+                const testp = document.getElementById("test");
 
-                    spotifyT.textContent =
-                        "♫ " + spotify.artist + " - " + spotify.title;
-                    spotifyT.href = spotify.link;
-                    spotifyT.classList.add("spotLinkActive");
-                } else {
-                    spotifyT.textContent = "♫ currently not listening to anything... ";
-                    spotifyT.classList.remove("spotLinkActive");
-                    spotifyT.removeAttribute("href");
+                if (lanyardjson.success == true) {
+                    if (lanyard.listening_to_spotify == true) {
+                        const spotify = {
+                            title: lanyard.spotify.song,
+                            artist: lanyard.spotify.artist,
+                            link:
+                                "https://open.spotify.com/track/" +
+                                lanyard.spotify.track_id,
+                        };
+                        var songRemaining = dayjs(lanyard.spotify.timestamps.end).from(Date.now(), true); // define remaining length of song
+                        // testp.textContent = songRemaining.toString(); 
+                        console.log(logspotify(spotify.artist + " - " + spotify.title)  + " with " + songRemaining + " remaining");
+                        activitiesT.textContent =
+                            "♫ " + spotify.artist + " - " + spotify.title + " (" + songRemaining + " remaining" + ")";
+                        activitiesT.href = spotify.link;
+                        activitiesT.classList.add("spotLinkActive");
+                    } else {
+                        try {
+                            if (typeof lanyard.activities[0].name === "string") {
+                                const activity0 = {
+                                    name: lanyard.activities[0].name,
+                                    state: lanyard.activities[0].state,
+                                    details: lanyard.activities[0].details,
+                                };
+                                activitiesT.classList.remove("spotLinkActive");
+                                activitiesT.removeAttribute("href");
+                                logactivity(
+                                    activity0.name + " - " + activity0.details
+                                );
+                                if (activity0.name == "Code") {
+                                        activitiesT.textContent = "⌨ " + "Visual Studio Code" + " - " + activity0.details;
+                                        console.log(activity0.state);
+                                } else {
+                                        activitiesT.textContent = "🎮 " + activity0.name + " - " + activity0.details;
+                                }
+                            }
+                        } catch (error) {
+                            activitiesT.textContent =
+                                "♫🎮 currently not doing anything... ";
+                            activitiesT.classList.remove("spotLinkActive");
+                            activitiesT.removeAttribute("href");
+                            console.log("not detected any activity")
+                        }
+                    }
+
                 }
+
             } catch (error) {
-                spotifyT.textContent = "Error";
-                spotifyT.removeAttribute("href");
-                spotifyT.classList.remove("spotLinkActive");
+                activitiesT.textContent = "Error";
+                activitiesT.removeAttribute("href");
+                activitiesT.classList.remove("spotLinkActive");
+                console.log("Something went wrong connecting to Lanyard...");
             }
         }
-
-        setInterval(fetchDiscordPresence, 1000);
+        fetchDiscordPresence();
+        setInterval(fetchDiscordPresence, 10000);
     </script>
 
 
