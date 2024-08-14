@@ -54,7 +54,7 @@ import Icon from "./icons/Icon.astro";
                             <!-- Your-Spotify  -->
                             <div class="divTableCell blackIcon">
                                 <Icon
-                                    link="https://spotify.byzocker.de/?gname=Last+week&token=9ae37424-3f7d-454e-bbb3-a9cc0f78eb95"
+                                    link="https://spotify.byzocker.de/?gname=Last+month&token=9ae37424-3f7d-454e-bbb3-a9cc0f78eb95"
                                     source="/icons/your-spotify.svg"
                                     imgsize="50px"
                                 />
@@ -201,7 +201,7 @@ import Icon from "./icons/Icon.astro";
                             }
                         } catch (error) {
                             activitiesT.textContent =
-                                "♫🎮 currently not doing anything... ";
+                                "offline... ";
                             activitiesT.classList.remove("spotLinkActive");
                             activitiesT.removeAttribute("href");
                             console.log("not detected any activity")
