@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
 import robotsTxt from "astro-robots-txt";
-
 import sitemap from "@astrojs/sitemap";
+import react from "@astrojs/react";
+
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,5 +15,9 @@ export default defineConfig({
       allow: '/',
       crawlDelay: 2
     }]
-  })]
+  })],
+  output: "server",
+  adapter: node({
+    mode: "standalone"
+  })
 });
