@@ -19,5 +19,9 @@ export default defineConfig({
   output: "server",
   adapter: node({
     mode: "standalone"
-  })
+  }),
+  redirects:{
+    '/l/yt': 'https://youtube.com',
+    '/l/spotify': 'https://open.spotify.com'
+  }
 });
