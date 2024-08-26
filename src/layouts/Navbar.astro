@@ -1,11 +1,26 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-
+import { ViewTransitions } from "astro:transitions";
+import NavItem from "../components/navbar/NavItem.astro";
 ---
 
 <head>
-    <ViewTransitions/>
+  <ViewTransitions />
 </head>
 
-<a href="/">Home</a>
-<a href="about">About</a>
+<style>
+  :root {
+    align: inherit;
+  }
+
+  .div-nav-all {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 1em;
+  }
+</style>
+
+<div class="div-nav-all">
+  <NavItem url="/" text="Home" />
+  <NavItem url="/about" text="About" />
+  <NavItem url="/about" text="About" />
+</div>
