@@ -8,7 +8,6 @@ const { url, text } = Astro.props;
 ---
 
 <style>
-  .a-link::after,
   .a-link::before,
   .a-link {
     text-decoration: none;
@@ -18,12 +17,14 @@ const { url, text } = Astro.props;
     transition: 0.2s;
   }
   .a-link {
-    padding-left: 1em;
-    padding-right: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
   }
   .a-link:hover {
-    font-weight: 800;
+    text-decoration: underline;
   }
 </style>
 
-<a class="a-link" href={url} >{text}</a>
+<span class="span-link">
+  <a class="a-link" href={url}>{text}</a>
+</span>

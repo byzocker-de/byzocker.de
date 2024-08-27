@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import Me from '../components/home/Me.astro';
 ---
 <Layout
   title="byzocker.de"
@@ -9,8 +9,9 @@ import Layout from "../layouts/Layout.astro";
   url="https://byzocker.de"
   favico="favicon.ico"
 >
-  <main>
-    123
-  </main>
-
+<main>
+  <div>
+    <Me/>
+  </div>
+</main>
 </Layout>
