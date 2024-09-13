@@ -1,69 +1,85 @@
 ---
-import Navbar from './Navbar.astro';
+import Navbar from "./Navbar.astro";
 
 export interface Props {
-	title: string;
-	description: string;
-	image: string;
-	url: string;
-	favico: string;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+  favico: string;
 }
 
 const { title, description, image, url, favico } = Astro.props;
-
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={favico} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={favico} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
 
-		<meta name="description" content={description} />
+    <meta name="description" content={description} />
 
-		<!-- Google / Search Engine Tags -->
-		<meta itemprop="name" content={title} />
-		<meta itemprop="description" content={description} />
-		<meta itemprop="image" content={image} />
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content={title} />
+    <meta itemprop="description" content={description} />
+    <meta itemprop="image" content={image} />
 
-		<!-- Facebook Meta Tags -->
-		<meta property="og:url" content={url} />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={image} />
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
 
-		<!-- Twitter Meta Tags -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={image} />
-
-	</head>
-	<body>
-		<Navbar/>
-		<slot />
-	</body>
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+  </head>
+  <body>
+    <div class="bg-blur">
+      <Navbar />
+      <slot />
+    </div>
+  </body>
 </html>
 
 <style is:global>
-	@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
-	:root {
-		color-scheme: dark;
-		/*  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#syntax */
-	}
-	html {
-		font-family: "Open Sans", sans-serif;
-		background-color: #252a3d;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-			DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+  :root {
+    color-scheme: only dark;
+    /*  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#syntax */
+    --bg-color: #252a3d;
+    --highlight: #2e3344;
+	--nav-highlight: #ffffff05;
+    --nav-color: #cecdd3;
+	--bg-grad-1: #181a24;
+	--bg-grad-2: #131924;
+  }
+  html {
+    font-family: "Open Sans", sans-serif;
+    /* font-family: "Anonymous Pro", monospace; */
+    /* background-color: var(--bg-color); */
+    background: linear-gradient(to right, var(--bg-grad-1), var(--bg-grad-2));
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+  Navbar{
+	margin: 15em;
+  }
 </style>
-
-

@@ -1,8 +1,6 @@
 import { defineConfig } from 'astro/config';
 import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
-import react from "@astrojs/react";
-
 import node from "@astrojs/node";
 
 // https://astro.build/config
