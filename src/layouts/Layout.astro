@@ -43,6 +43,12 @@ const { title, description, image, url, favico } = Astro.props;
   </head>
   <body>
     <div class="bg-blur">
+      <div class="background">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
       <Navbar />
       <slot />
     </div>
@@ -56,17 +62,17 @@ const { title, description, image, url, favico } = Astro.props;
     color-scheme: only dark;
     /*  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#syntax */
     --bg-color: #252a3d;
-    --highlight: #2e3344;
-	--nav-highlight: #ffffff05;
-    --nav-color: #cecdd3;
-	--bg-grad-1: #181a24;
-	--bg-grad-2: #131924;
+    --highlight: #5a658f;
+    --nav-highlight: #ffffff5d;
+    --nav-color: #888888;
+    --bg-grad-1: #181a24;
+    --bg-grad-2: #131924;
   }
   html {
     font-family: "Open Sans", sans-serif;
     /* font-family: "Anonymous Pro", monospace; */
     /* background-color: var(--bg-color); */
-    background: linear-gradient(to right, var(--bg-grad-1), var(--bg-grad-2));
+    /* background: linear-gradient(to right, var(--bg-grad-1), var(--bg-grad-2)); */
   }
   code {
     font-family:
@@ -79,7 +85,54 @@ const { title, description, image, url, favico } = Astro.props;
       Courier New,
       monospace;
   }
-  Navbar{
-	margin: 15em;
+</style>
+
+<style>
+  .background {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, #13151a, #0c1017);
+    display: flex;
+    flex-grow: 1;
+    z-index: -1;
+  }
+
+  .background div {
+    position: absolute;
+    border-radius: 100%;
+    height: 0;
+    filter: blur(200vw);
+    opacity: 0.4;
+  }
+
+  .background div:nth-child(1) {
+    background: linear-gradient(132deg, #1fcfc3 0%, #1f91cf 100%);
+    width: 65%;
+    padding-top: 65%;
+    left: 65%;
+    top: 15%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  .background div:nth-child(2) {
+    background: linear-gradient(132deg, #0800ff 0%, #e32be3 100%);
+    width: 55%;
+    padding-top: 55%;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  .background div:nth-child(3) {
+    background: linear-gradient(132deg, #1fcfc3 0%, #1f91cf 100%);
+    width: 45%;
+    padding-top: 45%;
+    left: 80%;
+    top: 80%;
+    transform: translateX(-50%) translateY(-50%);
   }
 </style>

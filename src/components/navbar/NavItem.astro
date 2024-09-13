@@ -20,13 +20,15 @@ const { url, text } = Astro.props;
     font-stretch: expanded;
     font-weight: 500;
     transition: 0.2s;
+
   }
   .a-link {
-    background-color:var(--nav-highlight);
+    /* background-color:var(--nav-highlight); */
     border-radius: 50px;
    padding: .5em;
    padding-left: .75em;
    padding-right: .75em;
+
   }
   .a-link:hover {
     background-color: var(--highlight);
@@ -49,5 +51,6 @@ const { url, text } = Astro.props;
 </style>
 
 <span class="span-link">
+  <span class="span-blur"/>
   <a class="a-link" href={url}>{text}</a>
 </span>
