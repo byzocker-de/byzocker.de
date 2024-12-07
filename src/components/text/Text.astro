@@ -9,10 +9,10 @@ import Icon from "./icons/Icon.astro";
             <div class="divTableCell">
                 <div class="divTableRow">
                     <div class="divTableCell">
-                        <div class="BigTextH1">byzocker</div>
+                        <div class="BigTextH1 transformRot marg_bot">byzocker</div>
                     </div>
                 </div>
-                <div class="divTableRow">
+                <div class="divTableRow  ">
                     <div class="divTableCell">
                         <a id="spotifyText">
                             loading...
@@ -110,6 +110,10 @@ import Icon from "./icons/Icon.astro";
         .BigTextH1 {
             font-size: 150px;
             font-weight: bold;
+
+        }
+        .marg_bot{
+            margin-bottom: .5em;
         }
         a:active,
         a:hover,
@@ -123,9 +127,10 @@ import Icon from "./icons/Icon.astro";
             text-decoration: underline white;
             cursor: pointer;
         }
-        .divTable {
+        .transformRot {
             transform-origin: 52% 57%;
             transform: rotate(-5deg) skew(-5deg, -2deg);
+
         }
         @media only screen and (max-width: 750px) {
             .BigTextH1 {
@@ -136,53 +141,97 @@ import Icon from "./icons/Icon.astro";
 
     <script>
         // 
-        import dayjs from 'dayjs';
+        import dayjs, { locale } from 'dayjs';
         import relativeTime from 'dayjs/plugin/relativeTime';
-        import UpdateLocale from 'dayjs/plugin/updateLocale';
+        import 'dayjs/locale/de';
+        import 'dayjs/locale/en';
+
 
         //
         dayjs.extend(relativeTime);
-        dayjs.extend(UpdateLocale);
+
         // 
         const userId = "322035497826385920";
         const lanyardUrl = "https://api.lanyard.rest/v1/users/" + userId;
-        const activitiesT = document.getElementById(
+        let activitiesT = document.getElementById(
             "spotifyText"
         ) as HTMLAnchorElement;
+
+        //
+        function wait(ms){
+            let start = new Date().getTime();
+            let end = start;
+            while(end < start + ms) {
+                end = new Date().getTime();
+            }
+        }
+
+        // Locale
+        const browserLanguage = window.navigator.language; //decting browser language
+        console.log("Dectected Browser Language: " + browserLanguage);  //outputting browser language to dev console
+
+
+        // defining default strings
+        let strRemaining = ' remaining';
+        let strWith = ' with ';
+        let strCurrentActivity = 'Current Activity;';
+        let strCurrentlyListening = 'Currently listening to';
+        let strNothing = 'Currently doing nothing.';
+        dayjs.locale('en');
+
+    
+        let isGerman = browserLanguage.includes("de");  //checking if browser language is german
+        if (isGerman == true) {
+            console.log("Dectected German Language")
+
+            // define german strings
+            strRemaining = ' übrig';
+            strWith = ' mit ';
+            strCurrentActivity = 'Aktuelle Aktiviät: ';
+            strCurrentlyListening = 'Hört momentan: ';
+            strNothing = 'Keine Aktiviät.';
+
+            dayjs.locale('de');
+
+        }
+        console.log("Current Dayjs locale: " + dayjs.locale());
+
+
+
 
         // 
         async function fetchDiscordPresence() {
             try {
-                const response = await fetch(lanyardUrl);
-                const lanyardjson = await response.json();
-                const lanyard = lanyardjson.data;
-                const logspotify = (value) =>
+                let response = await fetch(lanyardUrl);
+                let lanyardjson = await response.json();
+                let lanyard = lanyardjson.data;
+                let logspotify = (value) =>
                     console.log("detected listening \n'" + value + "'");
-                const logactivity = (value) =>
+                let logactivity = (value) =>
                     console.log("detected activity \n'" + value + "'");
 
                 const testp = document.getElementById("test");
 
                 if (lanyardjson.success == true) {
                     if (lanyard.listening_to_spotify == true) {
-                        const spotify = {
+                        let spotify = {
                             title: lanyard.spotify.song,
                             artist: lanyard.spotify.artist,
                             link:
                                 "https://open.spotify.com/track/" +
                                 lanyard.spotify.track_id,
                         };
-                        var songRemaining = dayjs(lanyard.spotify.timestamps.end).from(Date.now(), true); // define remaining length of song
+                        let songRemaining = dayjs(lanyard.spotify.timestamps.end).from(Date.now(), true); // define remaining length of song
                         // testp.textContent = songRemaining.toString(); 
-                        console.log(logspotify(spotify.artist + " - " + spotify.title)  + " with " + songRemaining + " remaining");
+                        console.log(logspotify(spotify.artist + " - " + spotify.title)  + strWith + songRemaining + strRemaining);
                         activitiesT.textContent =
-                            "♫ " + spotify.artist + " - " + spotify.title + " (" + songRemaining + " remaining" + ")";
+                            strCurrentlyListening + "♫ " + spotify.artist + " - " + spotify.title + " (" + songRemaining + strRemaining + ")";
                         activitiesT.href = spotify.link;
                         activitiesT.classList.add("spotLinkActive");
                     } else {
                         try {
                             if (typeof lanyard.activities[0].name === "string") {
-                                const activity0 = {
+                                let activity0 = {
                                     name: lanyard.activities[0].name,
                                     state: lanyard.activities[0].state,
                                     details: lanyard.activities[0].details,
@@ -193,15 +242,15 @@ import Icon from "./icons/Icon.astro";
                                     activity0.name + " - " + activity0.details
                                 );
                                 if (activity0.name == "Code") {
-                                        activitiesT.textContent = "⌨ " + "Visual Studio Code" + " - " + activity0.details;
+                                        activitiesT.textContent = strCurrentActivity +  "⌨ " + "Visual Studio Code" + " - " + activity0.details;
                                         console.log(activity0.state);
                                 } else {
-                                        activitiesT.textContent = "🎮 " + activity0.name + " - " + activity0.details;
+                                        activitiesT.textContent = strCurrentActivity + "🎮 " + activity0.name + " - " + activity0.details;
                                 }
                             }
                         } catch (error) {
                             activitiesT.textContent =
-                                "offline... ";
+                                "Currently doing nothing.";
                             activitiesT.classList.remove("spotLinkActive");
                             activitiesT.removeAttribute("href");
                             console.log("not detected any activity")
@@ -214,6 +263,8 @@ import Icon from "./icons/Icon.astro";
                 activitiesT.textContent = "Error";
                 activitiesT.removeAttribute("href");
                 activitiesT.classList.remove("spotLinkActive");
+                await wait(50) // Wait 50ms 
+                activitiesT.textContent = '';
                 console.log("Something went wrong connecting to Lanyard...");
             }
         }
