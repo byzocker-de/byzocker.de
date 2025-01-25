@@ -1,0 +1,46 @@
+---
+
+import Tab from "./tabs/tab.astro";
+import OpenLink from "./dialogue/openLink.astro";
+---
+
+<div class="cs-tabs margin-top">
+    <Tab
+        tabid="tabone"
+        checked="checked"
+        label="About me"
+    >
+        <span>
+            <h2>H21</h2>
+            <p>Text1</p>
+        </span>
+    </Tab>
+
+    <Tab
+        tabid="tabtwo"
+        label="Current activity"
+    >
+        <span>
+            <h2>H22</h2>
+            <p>Text2</p>
+        </span>
+    </Tab>
+
+    <Tab
+        tabid="tabthree"
+        label="Links"
+    >
+        <span>
+            <h2>H23</h2>
+            <p>Text3</p>
+            <OpenLink/>
+        </span>
+    </Tab>
+
+</div>
+
+<style>
+    .margin-top{
+        margin-top: 15px;
+    }
+</style>

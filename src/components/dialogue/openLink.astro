@@ -1,0 +1,36 @@
+---
+export interface Props{
+    name?: string;
+    serviceurl?: string;
+    label?: string;
+}
+
+const { name, serviceurl, label } = Astro.props;
+---
+<section>
+    <button
+      type="button"
+      class="cs-btn"
+      onclick="document.querySelector('.cs-dialog').showModal();"
+    >
+      Open dialog
+    </button>
+    <dialog class="cs-dialog">
+      <form method="dialog">
+        <div class="heading">
+          <div class="wrapper">
+            <div class="icon"></div>
+            <p class="text">Options</p>
+          </div>
+          <button class="cs-btn close"></button>
+        </div>
+        <div class="content">
+          You're about to open {serviceurl}, are you sure you want to continue?
+        </div>
+        <menu class="footer-btns">
+          <button class="cs-btn">OK</button>
+          <button class="cs-btn">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
+  </section>

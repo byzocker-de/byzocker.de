@@ -1,0 +1,23 @@
+---
+export interface Props{
+    tabid: string;
+    checked?: string;
+    label: string;
+}
+
+const { tabid, checked, label } = Astro.props;
+---
+
+
+<input
+    class="radiotab"
+    name="tabs"
+    tabindex="1"
+    type="radio"
+    id={tabid}
+    checked={checked}
+/>
+<label class="label" for={tabid}>{label}</label>
+<div class="panel" tabindex="1">
+    <slot/>
+</div>
