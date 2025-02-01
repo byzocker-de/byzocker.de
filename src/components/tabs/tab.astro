@@ -19,6 +19,6 @@ const { tabid, tabindex, checked, label } = Astro.props;
     checked={checked}
 />
 <label class="label" for={tabid}>{label}</label>
-<div class="panel" tabindex="1">
+<div class="panel" tabindex={tabindex}>
     <slot/>
 </div>

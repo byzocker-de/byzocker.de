@@ -7,23 +7,23 @@ import CurrentActivity from "./activity/currentActivity.astro";
 
 <div class="cs-tabs margin-top">
     <Tab
-        tabid="activity"
+        tabid="activity-content"
         tabindex="1"
-        checked="checked"
         label="Current activity"
     >
-        <span>
+        <span id="activity">
             <h2>H22</h2>
             <CurrentActivity/>
             <p>Text2</p>
         </span>
     </Tab>
+
     <Tab
-        tabid="links"
+        tabid="links-content"
         tabindex="2"
         label="Links"
     >
-        <span>
+        <span id="links">
             <h2>H23</h2>
             <p>Text3</p>
             <OpenLink
@@ -34,11 +34,11 @@ import CurrentActivity from "./activity/currentActivity.astro";
     </Tab>
 
     <Tab
-        tabid="about"
+        tabid="about-content"
         tabindex="2"
         label="About me"
     >
-        <span>
+        <span id="about">
             <h2>123456</h2>
             <p>abcdef</p>
         </span>
@@ -46,6 +46,26 @@ import CurrentActivity from "./activity/currentActivity.astro";
 
 
 </div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    const hash = window.location.hash.substring(1);
+    console.log(hash);
+    if (hash) {
+        const tab = document.querySelector(`#${hash}-content`);
+        console.log(tab);
+        if (tab) {
+            tab.checked = true;
+        }
+        }  else{
+            const firstTab = document.querySelector('[tabindex="1"]');
+            console.log(firstTab + "1");
+            if (firstTab) {
+                firstTab.checked = true
+            }
+    }
+  });
+</script>
 
 <style>
     .margin-top{

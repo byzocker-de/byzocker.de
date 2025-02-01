@@ -45,7 +45,8 @@ const domain = url.hostname;
   // Let button open the link
   document.getElementById('continue-button').addEventListener('click', function() {
     const serviceurl = this.getAttribute('data-serviceurl');
-    window.location.href = serviceurl;
+    //window.location.href = serviceurl;
+    window.open(serviceurl, '_blank');
   });
 
 </script>
