@@ -1,41 +1,49 @@
 ---
 
 import Tab from "./tabs/tab.astro";
-import OpenLink from "./dialogue/openLink.astro";
+import OpenLink from "./links/openLink.astro";
+import CurrentActivity from "./activity/currentActivity.astro";
 ---
 
 <div class="cs-tabs margin-top">
     <Tab
-        tabid="tabone"
+        tabid="activity"
+        tabindex="1"
         checked="checked"
-        label="About me"
-    >
-        <span>
-            <h2>H21</h2>
-            <p>Text1</p>
-        </span>
-    </Tab>
-
-    <Tab
-        tabid="tabtwo"
         label="Current activity"
     >
         <span>
             <h2>H22</h2>
+            <CurrentActivity/>
             <p>Text2</p>
         </span>
     </Tab>
-
     <Tab
-        tabid="tabthree"
+        tabid="links"
+        tabindex="2"
         label="Links"
     >
         <span>
             <h2>H23</h2>
             <p>Text3</p>
-            <OpenLink/>
+            <OpenLink
+                name="NC"
+                serviceurl="https://cloud.byzocker.de/login"
+            />
         </span>
     </Tab>
+
+    <Tab
+        tabid="about"
+        tabindex="2"
+        label="About me"
+    >
+        <span>
+            <h2>123456</h2>
+            <p>abcdef</p>
+        </span>
+    </Tab>
+
 
 </div>
 

@@ -1,0 +1,59 @@
+---
+export interface Props{
+    name: string;
+    serviceurl: string;
+}
+
+const { name, serviceurl } = Astro.props;
+
+
+
+
+
+---
+
+<section>
+    <button
+      type="button"
+      class="cs-btn m1-hover"
+      onclick="document.querySelector('.cs-dialog').showModal();"
+    >
+      Open {name}
+    </button>
+    <dialog class="cs-dialog">
+      <form method="dialog">
+        <div class="heading">
+          <div class="wrapper">
+            <div class="icon"></div>
+            <p class="text">Open {name}</p>
+          </div>
+          <button class="cs-btn close m1-hover"></button>
+        </div>
+        <div class="content">
+          You're about to visit {serviceurl}, are you sure you want to continue?
+        </div>
+        <menu class="footer-btns">
+          <button class="cs-btn m1-hover" id="continue-button" data-serviceurl={serviceurl}>OK</button>
+          <button class="cs-btn m1-hover">Cancel</button>
+        </menu>
+      </form>
+    </dialog>
+</section>
+
+
+<script>
+  // Let button open the link
+  document.getElementById('continue-button').addEventListener('click', function() {
+    const serviceurl = this.getAttribute('data-serviceurl');
+    window.location.href = serviceurl;
+  });
+
+</script>
+
+<style>
+
+.m1-hover{
+  cursor: pointer; 
+}
+
+</style>
