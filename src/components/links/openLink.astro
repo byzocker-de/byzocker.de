@@ -6,9 +6,9 @@ export interface Props{
 
 const { name, serviceurl } = Astro.props;
 
-
-
-
+// Get Domain from URL to show in dialog
+const url = new URL(serviceurl);
+const domain = url.hostname;
 
 ---
 
@@ -30,7 +30,7 @@ const { name, serviceurl } = Astro.props;
           <button class="cs-btn close m1-hover"></button>
         </div>
         <div class="content">
-          You're about to visit {serviceurl}, are you sure you want to continue?
+          You're about to visit {domain}, are you sure you want to continue?
         </div>
         <menu class="footer-btns">
           <button class="cs-btn m1-hover" id="continue-button" data-serviceurl={serviceurl}>OK</button>
