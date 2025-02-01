@@ -1,22 +1,36 @@
 ---
-const discord_id = '322035497826385920';
+//const discord_id = '322035497826385920';
 
 
 
 ---
 
-
+<h1 id="h1"></h1>
+<h2 id="h2"></h2>
+<p id="p"></p>
+<script src="https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js" defer></script>
 <script>
+    declare var lanyard: any;
 
-// https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js
+    const discord_id = '322035497826385920';
+    document.addEventListener('DOMContentLoaded', () => {
+        lanyard({
+            userId: discord_id,
+            socket: true,
+            onPresenceUpdate: lanyardData
+        });
+
+        function lanyardData(presenceData){
+            console.log("updated Presence data\n ", presenceData);
+            document.getElementById('h2').innerText = presenceData.activities[0].state;
+            document.getElementById('p').innerText = presenceData.activities[0].details;
+
+        }
 
 
-// // websocket with single user example
-// lanyard({
-//     userId: "213325478096797697",
-//     socket: true,
-//     onPresenceUpdate: console.log // presenceData
-// }) // returns a websocket
+
+    });
+
 
 
 </script>

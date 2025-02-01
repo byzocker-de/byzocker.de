@@ -12,9 +12,9 @@ import CurrentActivity from "./activity/currentActivity.astro";
         label="Current activity"
     >
         <span id="activity">
-            <h2>H22</h2>
+
             <CurrentActivity/>
-            <p>Text2</p>
+
         </span>
     </Tab>
 
@@ -50,16 +50,16 @@ import CurrentActivity from "./activity/currentActivity.astro";
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
     const hash = window.location.hash.substring(1);
-    console.log(hash);
+    // console.log(hash);
     if (hash) {
         const tab = document.querySelector(`#${hash}-content`);
-        console.log(tab);
+        // console.log(tab);
         if (tab) {
             tab.checked = true;
         }
         }  else{
             const firstTab = document.querySelector('[tabindex="1"]');
-            console.log(firstTab + "1");
+            // console.log(firstTab + "1");
             if (firstTab) {
                 firstTab.checked = true
             }
