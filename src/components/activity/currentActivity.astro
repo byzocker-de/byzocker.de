@@ -8,6 +8,7 @@
 <h1 id="h1"></h1>
 <h2 id="h2"></h2>
 <p id="p"></p>
+<p id="test"></p>
 <script src="https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js" defer></script>
 <script>
     declare var lanyard: any;
@@ -20,16 +21,27 @@
             onPresenceUpdate: lanyardData
         });
 
-        function lanyardData(presenceData){
+
+
+
+    });
+
+    // Defining the html elements
+    let htmlName = document.getElementById('test').innerText;
+
+
+    // Defining the function that will be called when the presence is updated
+    function lanyardData(presenceData){
+            let data = presenceData;
+
+
+            htmlName = data.activities[0].name;
+
             console.log("updated Presence data\n ", presenceData);
             document.getElementById('h2').innerText = presenceData.activities[0].state;
             document.getElementById('p').innerText = presenceData.activities[0].details;
 
         }
-
-
-
-    });
 
 
 
