@@ -5,44 +5,218 @@
 
 ---
 
-<h1 id="h1"></h1>
-<h2 id="h2"></h2>
-<p id="p"></p>
-<p id="test"></p>
+<div>
+    <span id="test"></span>
+    <div id="activity">
+        <div id="activity-image">
+            <img id="activity-icon" src="">
+        </div>
+        <div id="activity-info">
+            <h2 id="activity-title">Title</h2>
+            <p id="activity-description">Detail</p>
+        </div>
+    </div>
+
+    <div id="progressbar-spanning" class="hidden">
+        <div id="song-elapsed">0:00</div>
+        <div id="song-progressbar">
+            <div id="song-progress"></div>
+        </div>
+        <div id="song-remaining">0:00</div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/gh/0x5841524f4e/js-lanyard/lanyard.js" defer></script>
 <script>
-    declare var lanyard: any;
 
-    const discord_id = '322035497826385920';
-    document.addEventListener('DOMContentLoaded', () => {
-        lanyard({
-            userId: discord_id,
-            socket: true,
-            onPresenceUpdate: lanyardData
-        });
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
+declare var lanyard: any;
 
-
-
+const discord_id = '322035497826385920';
+document.addEventListener('DOMContentLoaded', () => {
+    lanyard({
+        userId: discord_id,
+        socket: true,
+        onPresenceUpdate: lanyardData
     });
+});
 
-    // Defining the html elements
-    let htmlName = document.getElementById('test').innerText;
-
-
-    // Defining the function that will be called when the presence is updated
-    function lanyardData(presenceData){
-            let data = presenceData;
+// Defining the html elements
+let htmlName = document.getElementById('test').innerText;
 
 
-            htmlName = data.activities[0].name;
+// Defining the function that will be called when the presence is updated
+function lanyardData(data){
+    console.log("updated Presence data\n ", data);
 
-            console.log("updated Presence data\n ", presenceData);
-            document.getElementById('h2').innerText = presenceData.activities[0].state;
-            document.getElementById('p').innerText = presenceData.activities[0].details;
+    let testElement = document.getElementById('test');
+
+    let title = document.getElementById('activity-title') as HTMLHeadingElement;
+    let description = document.getElementById('activity-description') as HTMLParagraphElement;
+    let icon = document.getElementById('activity-icon') as HTMLImageElement;
+    let songElapsed = document.getElementById('song-elapsed') as HTMLDivElement;
+    let songProgressbar = document.getElementById('song-progressbar') as HTMLDivElement;
+    let songProgress = document.getElementById('song-progress') as HTMLDivElement;
+    let songRemaining = document.getElementById('song-remaining') as HTMLDivElement;
+
+
+
+
+
+    // Start out with isListening set to false
+    let isListening = false;
+
+    // Check every 2 Seconds if user is Listening to Spotify
+    setInterval(() => {
+        if (data.listening_to_spotify == true){
+            document.getElementById('progressbar-spanning').classList.remove('hidden');
+            return isListening = true;
 
         }
+        else if (data.listening_to_spotify == false){
+            document.getElementById('progressbar-spanning').classList.add('hidden');
+            return isListening = false;
+
+        }
+    }, 2000);
+
+    // Check if the user is Listening to spotify
+    if (isListening = true){
+        // If the user is listening to spotify, then the listening_to_spotify key will be true
+        title.innerText = data.spotify.song;
+        description.innerText = data.spotify.artist;
+        icon.src = data.spotify.album_art_url;
+
+        // Calculate the progress of the song
+        let songStart = data.spotify.timestamps.start;
+        let songEnd = data.spotify.timestamps.end;
+        let songLength = (songEnd - songStart )/1000;
+        let songElapsedData = (Date.now() - songStart) / 1000;
+        let songRemainingData = (songLength - (Date.now() - songStart)) / 1000;
+
+        //testElement.innerText = songElapsedData;
+
+        // Set Spotify Song Progress Data in function
+        function setSpotifySongProgressData(){
+            // Set the song progress
+            songElapsed.innerText = `${Math.floor(songElapsedData / 60)}:${(Math.floor(songElapsedData % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+
+            // Set how long the song is
+            songRemaining.innerText = `${Math.floor(songLength / 60)}:${(Math.floor(songLength % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
 
 
+            // Set the progress bar
+            songProgress.style.width = `${(songElapsedData / songLength) * 100}%`;
+        }
+        setSpotifySongProgressData();
+
+        // Add one second to songElapseddata each second, to keep the song progress updated
+        setInterval(() => {
+            // songElapsedData++;
+            // songRemainingData--;
+            setSpotifySongProgressData();
+        }, 1000);
+
+
+        // Set Activity div href to Spotify link
+        document.getElementById('activity').onclick = function() {
+            window.open("https://open.spotify.com/track/" + data.spotify.track_id, '_blank');
+        }
+
+        // // Set the song progress
+        // songElapsed.innerText = `${Math.floor(songElapsedData / 60)}:${(Math.floor(songElapsedData % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+
+        // // Set how long the song is
+        // songRemaining.innerText = `${Math.floor(songLength / 60)}:${(Math.floor(songLength % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+
+
+        // // Set the progress bar
+        // songProgress.style.width = `${(songElapsedData / songLength) * 100}%`;
+    } else {
+        // If the user isn't listening to spotify, then the listening_to_spotify key will be false
+        // Select other activity instead
+        title.innerText = data.discord.status;
+        description.innerText = data.discord.activities[0].name;
+        icon.src = data.discord.activities[0].assets.large_image;
+        document.getElementById('progressbar-spanning').innerHTML = 'none';
+    }
+}
 
 </script>
+
+
+
+
+<style>
+    
+    /* #activity{
+        background-color: red;
+    }
+    #activity-info{
+        background-color: green;
+    }
+    #activity-image{
+        background-color: yellow;
+    }
+    #activity-icon{
+        background-color: blue;
+    }
+    #progressbar-spanning{
+        background-color: blue;
+    } */
+    #song-progressbar{
+        background-color: green;
+    }
+    #song-progress{
+        background-color: yellow;
+    }
+
+
+    #activity{
+        display: flex;
+        padding: 10px;
+    }
+
+    #activity-icon, #activity-info{
+        display: inherit;
+        padding: 5px;
+        padding-right: 10px
+    }
+    #activity-info{
+        display: block;
+        width: 100%;
+    }
+    #activity-title, #activity-description{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    #activity-icon{
+        width: 100px;
+        height: 100%;
+    }
+    #progressbar-spanning{
+        margin: fit-content;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #song-progressbar{
+        width: 85%;
+        height: 10px;
+    }
+    #song-progress{
+        height: 100%;
+    }
+</style>
