@@ -14,15 +14,17 @@
         <div id="activity-info">
             <h2 id="activity-title">Title</h2>
             <p id="activity-description">Detail</p>
+            <button id="activiy-button" class="cs-btn hidden">Button</button>
         </div>
     </div>
 
-    <div id="progressbar-spanning" class="hidden">
-        <div id="song-elapsed">0:00</div>
-        <div id="song-progressbar">
-            <div id="song-progress"></div>
+    <div id="progressbar-spanning" class="hidden ">
+        <div id="song-elapsed" class="">0:00</div>
+        <div id="song-progressbar " class="cs-progress-bar">
+        <!-- <div id="song-progressbar " class="cs-slider"> -->
+            <div id="song-progress" class="bars range"></div>
         </div>
-        <div id="song-remaining">0:00</div>
+        <div id="song-remaining" class="">0:00</div>
     </div>
 </div>
 
@@ -37,119 +39,7 @@
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
-declare var lanyard: any;
-
-const discord_id = '322035497826385920';
-document.addEventListener('DOMContentLoaded', () => {
-    lanyard({
-        userId: discord_id,
-        socket: true,
-        onPresenceUpdate: lanyardData
-    });
-});
-
-// Defining the html elements
-let htmlName = document.getElementById('test').innerText;
-
-
-// Defining the function that will be called when the presence is updated
-function lanyardData(data){
-    console.log("updated Presence data\n ", data);
-
-    let testElement = document.getElementById('test');
-
-    let title = document.getElementById('activity-title') as HTMLHeadingElement;
-    let description = document.getElementById('activity-description') as HTMLParagraphElement;
-    let icon = document.getElementById('activity-icon') as HTMLImageElement;
-    let songElapsed = document.getElementById('song-elapsed') as HTMLDivElement;
-    let songProgressbar = document.getElementById('song-progressbar') as HTMLDivElement;
-    let songProgress = document.getElementById('song-progress') as HTMLDivElement;
-    let songRemaining = document.getElementById('song-remaining') as HTMLDivElement;
-
-
-
-
-
-    // Start out with isListening set to false
-    let isListening = false;
-
-    // Check every 2 Seconds if user is Listening to Spotify
-    setInterval(() => {
-        if (data.listening_to_spotify == true){
-            document.getElementById('progressbar-spanning').classList.remove('hidden');
-            return isListening = true;
-
-        }
-        else if (data.listening_to_spotify == false){
-            document.getElementById('progressbar-spanning').classList.add('hidden');
-            return isListening = false;
-
-        }
-    }, 2000);
-
-    // Check if the user is Listening to spotify
-    if (isListening = true){
-        // If the user is listening to spotify, then the listening_to_spotify key will be true
-        title.innerText = data.spotify.song;
-        description.innerText = data.spotify.artist;
-        icon.src = data.spotify.album_art_url;
-
-        // Calculate the progress of the song
-        let songStart = data.spotify.timestamps.start;
-        let songEnd = data.spotify.timestamps.end;
-        let songLength = (songEnd - songStart )/1000;
-        let songElapsedData = (Date.now() - songStart) / 1000;
-        let songRemainingData = (songLength - (Date.now() - songStart)) / 1000;
-
-        //testElement.innerText = songElapsedData;
-
-        // Set Spotify Song Progress Data in function
-        function setSpotifySongProgressData(){
-            // Set the song progress
-            songElapsed.innerText = `${Math.floor(songElapsedData / 60)}:${(Math.floor(songElapsedData % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-
-            // Set how long the song is
-            songRemaining.innerText = `${Math.floor(songLength / 60)}:${(Math.floor(songLength % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-
-
-            // Set the progress bar
-            songProgress.style.width = `${(songElapsedData / songLength) * 100}%`;
-        }
-        setSpotifySongProgressData();
-
-        // Add one second to songElapseddata each second, to keep the song progress updated
-        setInterval(() => {
-            // songElapsedData++;
-            // songRemainingData--;
-            setSpotifySongProgressData();
-        }, 1000);
-
-
-        // Set Activity div href to Spotify link
-        document.getElementById('activity').onclick = function() {
-            window.open("https://open.spotify.com/track/" + data.spotify.track_id, '_blank');
-        }
-
-        // // Set the song progress
-        // songElapsed.innerText = `${Math.floor(songElapsedData / 60)}:${(Math.floor(songElapsedData % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-
-        // // Set how long the song is
-        // songRemaining.innerText = `${Math.floor(songLength / 60)}:${(Math.floor(songLength % 60)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-
-
-        // // Set the progress bar
-        // songProgress.style.width = `${(songElapsedData / songLength) * 100}%`;
-    } else {
-        // If the user isn't listening to spotify, then the listening_to_spotify key will be false
-        // Select other activity instead
-        title.innerText = data.discord.status;
-        description.innerText = data.discord.activities[0].name;
-        icon.src = data.discord.activities[0].assets.large_image;
-        document.getElementById('progressbar-spanning').innerHTML = 'none';
-    }
-}
-
+import './lanyard.mjs';
 </script>
 
 
@@ -172,12 +62,12 @@ function lanyardData(data){
     #progressbar-spanning{
         background-color: blue;
     } */
-    #song-progressbar{
+    /* #song-progressbar{
         background-color: green;
     }
     #song-progress{
         background-color: yellow;
-    }
+    } */
 
 
     #activity{
@@ -192,12 +82,17 @@ function lanyardData(data){
     }
     #activity-info{
         display: block;
-        width: 100%;
+        width: 85%;
     }
     #activity-title, #activity-description{
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+    }
+    #activity-button{
+        /* Wrap button behind activity-description */
+        display: none;
+
     }
     #activity-icon{
         width: 100px;
