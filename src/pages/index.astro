@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Main from "../components/Main.astro";
+// import Main from "../components/Main.astro";
+import Text from "../components/text/Text.astro";
+import Title from "../components/text/header.astro";
+import Foot from "../components/text/footer.astro";
+import Intro from "../components/text/main.astro";
+import Tabs from "../components/tabs.astro";
 ---
 
 <!-- <Layout
@@ -17,10 +22,43 @@ import Main from "../components/Main.astro";
   url="https://byzocker.de"
   favico="favicon.ico"
 >
-  <main>
-    <!-- https://bddvlpr.com/ -->
-    <!-- <About /> -->
-    <Main/>
-  </main>
-
+<main>
+  <span class="mainspan">
+    <!-- <Text/> -->
+     <header>
+        <Title/>
+     </header>
+      <Intro/>
+      <Tabs/>
+     <footer>
+      <Foot>
+        Made with ❤️ by byzocker
+      </Foot>
+     </footer>
+  </span>
+  
+  <style>
+    :root {
+  
+        /* display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80dvh; */
+        
+    }
+    body {
+      font-size: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    header{
+      margin-bottom: 15px;
+    }
+    footer{
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</main>
 </Layout>
