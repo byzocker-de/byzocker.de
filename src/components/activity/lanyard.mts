@@ -57,7 +57,7 @@ function lanyardData(data) {
             //checkListening();
         }, 1000);
 
-        if (isListening == true) {
+        if (isListening) {
             // If the user is listening to spotify, then the listening_to_spotify key will be true
             // Calculate the progress of the song
             let songStart = data.spotify.timestamps.start;
@@ -118,7 +118,7 @@ function lanyardData(data) {
 
 
             // Set Activity div href to Spotify link
-            let activityDiv = document.getElementById('activity'); 
+            let activityDiv = document.getElementById('activity');
             activityDiv.style.cursor = 'pointer';
             activityDiv.title = 'Open Spotify';
             activityDiv.onclick = function () {
@@ -127,7 +127,7 @@ function lanyardData(data) {
         } else if (isListening == false) {
             // If the user isn't listening to spotify, then the listening_to_spotify key will be false
             // Select other activity instead
-            let dataActivity;
+            let dataActivity = data.discord.activities[0];
 
 
 
@@ -135,18 +135,18 @@ function lanyardData(data) {
             document.getElementById('progressbar-spanning').innerHTML = 'none';
 
             // If first activity's name is Spotify, then select the second activity
-            function checkIsActivitySpotify(){
-                if (data.discord.activities[0].id == 'spotify:1') {
-                    return dataActivity = data.discord.activities[1];
-                }
-                else {
-                    return dataActivity = data.discord.activities[0];
-                };
-            };
+            // function checkIsActivitySpotify(){
+            //     if (data.discord.activities[0].id == 'spotify:1') {
+            //         return dataActivity = data.discord.activities[1];
+            //     }
+            //     else {
+            //         return dataActivity = data.discord.activities[0];
+            //     };
+            // };
 
             //console.log(data.discord.activities[3].id);
 
-            checkIsActivitySpotify();
+            // checkIsActivitySpotify();
 
             // Set the data for the activity
             title.innerText = data.discord.status;
