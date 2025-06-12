@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 // import Main from "../components/Main.astro";
-import Text from "../components/text/Text.astro";
-import Title from "../components/text/header.astro";
-import Foot from "../components/text/footer.astro";
-import Intro from "../components/text/main.astro";
-import Tabs from "../components/tabs.astro";
+// import Text from "../components/text/Text.astro";
+// import Title from "../components/text/header.astro";
+// import Foot from "../components/text/footer.astro";
+// import Intro from "../components/text/main.astro";
+// import Tabs from "../components/tabs.astro";
 ---
 
 <!-- <Layout
@@ -16,7 +16,7 @@ import Tabs from "../components/tabs.astro";
   favico="favicon.svg"
 > -->
 <Layout
-  title="byzocker.de"
+  title="<< tobi >>"
   description="hey."
   image=""
   url="https://byzocker.de"
@@ -24,33 +24,45 @@ import Tabs from "../components/tabs.astro";
 >
 <main>
   <span class="mainspan">
-    <!-- <Text/> -->
-     <header>
-        <Title/>
-     </header>
-      <Intro/>
-      <Tabs/>
-     <footer>
-      <Foot>
-        Made with ❤️ by byzocker
-      </Foot>
-     </footer>
+
+    <span class="textspan">
+        <h1>byzocker</h1>
+        <p>hey.</p>
+    </span>
+    <span class="linksspan">
+      <a href="https://cloud.byzocker.de" target="_blank" rel="noopener">
+        <img src="../../public/icons/nextcloud.svg" alt="Nextcloud" width="30" />
+      </a>
+      <a href="https://instagram.com/byzocker" target="_blank" rel="noopener">
+        <img src="../../public/icons/instagram.svg" alt="Instagram" width="30" />
+      </a>
+      <a href="https://tobiiiiiii.de" target="_blank" rel="noopener">
+        <img src="../../public/icons/link.svg" alt="Website" width="30" />
+      </a>
+    </span>
+
   </span>
-  
+
   <style>
     :root {
-  
-        /* display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80dvh; */
-        
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80dvh;
     }
     body {
       font-size: 20px;
       padding: 40px;
       max-width: 800px;
       margin: auto;
+      background-image: url("https://images.unsplash.com/photo-1672009190560-12e7bade8d09?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      backdrop-filter: blur(50px);
+      background-position: center;
+      background-size: cover;
+      border-radius: 25px;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
     }
     header{
       margin-bottom: 15px;
@@ -58,6 +70,46 @@ import Tabs from "../components/tabs.astro";
     footer{
       margin-top: 15px;
       text-align: center;
+    }
+    /* .mainspan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80dvh;
+    } */
+    .textspan {
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      
+    }
+    .linksspan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 5em;
+      margin-bottom: 0.1em;
+      transition: .25s;
+    }
+    p {
+      font-size: 1em;
+      margin: 0;
+      transition: .25s;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 3em;
+      }
+      p {
+        font-size: .5em;
+      }
+    }
+    img{
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(14deg) brightness(107%) contrast(101%);
     }
   </style>
 </main>
