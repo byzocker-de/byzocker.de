@@ -1,29 +1,41 @@
 ---
 interface Props {
-    title?: string
+    title?: string;
+    width?: string;
 }
 
-const { title} = Astro.props
+const { title, width = '28rem' } = Astro.props
 ---
 
-<div class="container">
+<div class="container" style={`width: ${width}`}>
     <h2 class="container-title">{title}</h2>
-    <slot />
+    <slot class="container-slot" />
 </div>
 
 
 
 <style>
     .container-title{
-        padding-top: 3rem;
+        padding-top: 1rem;
         padding-bottom: .5rem;
-        font-size: 1.5rem;
+        font-size: 3rem;
         font-weight: 700;
         text-align: center;
+        margin: 0 0 1rem 0;
+    }
+    .container-slot{
+        text-align: center;
+           flex: 1;
+           display: flex;
+           align-items: center;
+           justify-content: center;
     }
     .container{
-        width: 28rem;
         background: var(--container-bg-color);
         border-radius: 10px;
+           display: flex;
+           flex-direction: column;
+           min-height: 10rem;
+           max-width: 100%;
     }
 </style>

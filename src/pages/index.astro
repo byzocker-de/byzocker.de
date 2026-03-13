@@ -18,59 +18,141 @@ import LinkAction from "../components/LinkAction.astro";
     <p>byzocker</p>
   </span>
 
-  <!-- Content Boxes -->
-  <span id="site-content">
+  <div class="content-span">
+    <!-- Content Boxes -->
+    <span id="site-content" class="site-content">
 
 
-    <!-- About me -->
-    <LinkContainer title="About me">
-      <p>tinkerer, thinker, tobi, 18</p>
-    </LinkContainer>
+      <!-- About me -->
+      <span>
+        <LinkContainer title="about me">
+          <span class="about-parent">
+            <p>tinkerer, thinker, tobi, 18</p>
+          </span>
+        </LinkContainer>
+      </span>
 
 
-    <!-- Contact -->
-    <LinkContainer title="Contact">
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-    </LinkContainer>
+      <!-- Contact -->
+      <span>
+        <LinkContainer title="contact me">
+          <span class="contact-parent">
+            <LinkAction href="#" src="/favicon.ico" alt="Email Address" label="tobi@byzocker.de" />
+            <LinkAction href="#" src="/favicon.ico" alt="Matrix Address" label="@tobi:matrix.byzocker.de" />
+          </span>
+        </LinkContainer>
+      </span>
 
 
-    <!-- Profiles -->
-    <LinkContainer title="Links">
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-    </LinkContainer>
+
+      <!-- Profiles -->
+      <span>
+        <LinkContainer title="profiles" width="20rem">
+          <span class="fourlink-parent">
+            <LinkAction href="#" src="/icons/instagram.svg" alt="Instagram" label="@byzocker" />
+            <LinkAction href="#" src="/icons/youtube.svg" alt="YouTube" label="@byzocker" />
+            <LinkAction href="#" src="/icons/steam.svg" alt="Steam" label="/id/byzocker" />
+            <LinkAction href="#" src="/icons/spotify.svg" alt="Spotify" label="@byzocker" />
+          </span>
+        </LinkContainer>
+      </span>
 
 
-    <!-- Services -->
-    <LinkContainer title="Links">
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
-    </LinkContainer>
-  </span>
+      <!-- Services -->
+      <span>
+        <LinkContainer title="services" width="20rem">
+          <span class="fourlink-parent">
+            <LinkAction href="#" src="/favicon.ico" alt="#" label="Matrix" />
+            <LinkAction href="#" src="/favicon.ico" alt="#" label="Nextcloud" />
+            <LinkAction href="#" src="/favicon.ico" alt="#" label="Home Assistant" />
+            <LinkAction href="#" src="/favicon.ico" alt="#" label="Immich" />
+          </span>
+        </LinkContainer>
+      </span>
+    </span>
+  </div>
 
   <footer id="site-footer">
     <p><a>service status</a></p>
   </footer>
 
 
-  <!-- <LinkContainer title="Links">
-    test
-  </LinkContainer> -->
-
-
-
   <style>
+    /* Grid Arrangements */
+
+    /* Container Arrangements */
+    /* 3  1  4
+       3  2  4 */
+    #site-content{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 3px;
+      justify-items: center; /* center children horizontally */
+      align-items: center;   /* center children vertically */
+      width: max-content;    /* shrink to fit the grid items */
+      margin: 0 auto;        /* center the grid on the page */
+    }
+    .site-content > *{
+      background-color: red;
+      padding: 1rem;
+    }
+    #site-content > *:nth-child(1){
+      grid-column: 2;
+      grid-row: 1;
+    }
+    #site-content > *:nth-child(2){
+      grid-column: 2;
+      grid-row: 2;
+    }
+    #site-content > *:nth-child(3){
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+    #site-content > *:nth-child(4){
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+
+    /* Contact Arrangement */
+    /* 1 2 */
+    .contact-parent{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+      gap: 5px;
+    }
+
+    /* Fourlink Arrangement */
+    /* 1 2 
+       3 4 */
+    .fourlink-parent{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 5px;
+    }
+
+    .content-span{
+      display: flex;
+      justify-content: center;
+      width: auto;
+      background-color: yellow;
+    }
+
     .header-byzocker{
-        font-family: 'Caveat', cursive;
-        font-size: 10rem;
-        font-weight: 700;
-        text-align: center;
-        padding-top: 1rem;
+      font-family: 'Caveat', cursive;
+      font-size: 7.5rem;
+      font-weight: 700;
+      text-align: center;
+      padding-top: 1rem;
+    }
+
+    .about-parent > p{
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
     }
   </style>
 </main>
