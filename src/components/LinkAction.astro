@@ -1,0 +1,40 @@
+---
+interface Props {
+    href: string;
+    src: string;
+    alt?: string;
+    label?: string;
+    target?: string;
+    rel?: string;
+}
+
+const { href, src, alt = '', label = '', target = '_self', rel = 'noopener noreferrer' } =
+    Astro.props as Props;
+---
+
+<a class="link-action" href={href} target={target} rel={rel}>
+    <img class="link-action__img" src={src} alt={alt} />
+    {label && <span class="link-action__label">{label}</span>}
+</a>
+
+<style>
+    .link-action {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .link-action__img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .link-action__label {
+        margin-top: 0.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: inherit;
+    }
+</style>

@@ -1,10 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import LinkContainer from "../components/LinkContainer.astro";
+import LinkAction from "../components/LinkAction.astro";
 ---
 
 <Layout
-  title="<< tobi >>"
+  title="tobi."
   description="hey."
   image=""
   url="https://byzocker.de"
@@ -20,6 +21,36 @@ import LinkContainer from "../components/LinkContainer.astro";
   <!-- Content Boxes -->
   <span id="site-content">
 
+
+    <!-- About me -->
+    <LinkContainer title="About me">
+      <p>tinkerer, thinker, tobi, 18</p>
+    </LinkContainer>
+
+
+    <!-- Contact -->
+    <LinkContainer title="Contact">
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+    </LinkContainer>
+
+
+    <!-- Profiles -->
+    <LinkContainer title="Links">
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+    </LinkContainer>
+
+
+    <!-- Services -->
+    <LinkContainer title="Links">
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+      <LinkAction href="#" src="/favicon.ico" alt="#" label="reallylongstring" />
+    </LinkContainer>
   </span>
 
   <footer id="site-footer">
