@@ -1,0 +1,87 @@
+---
+interface Props {
+    title?: string;
+    isWider?: boolean;
+}
+
+let cwidth;
+const { title, isWider} = Astro.props;
+
+if (isWider == true){
+    cwidth = '28rem';
+} else {
+    cwidth = '20rem';
+}
+
+
+
+let width = cwidth;
+
+---
+
+<div id="container" class="container" style={`width: ${width}`}>
+    <h2 class="container-title">{title}</h2>
+    <div class="container-slot"><slot /></div>
+</div>
+
+<script define:vars={{width}}>
+    // if (window.matchMedia("(max-width: 1200px)").matches) {
+    //     width = '20rem';
+    //     document.getElementById('container').style.width = width;
+    // } else{
+    //     width = cwidth;
+    //     document.getElementById('container').style.width = width;
+    // }
+</script>
+
+
+<style>
+
+    .container-title{
+        padding-top: 1rem;
+        padding-bottom: .5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 0 1rem 0;
+    }
+    .container-slot{
+        text-align: center;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* ensure slotted content (e.g. .fourlink-parent) centers vertically */
+    .container-slot > * {
+        align-self: center;
+    }
+    .container{
+        /* background: rgba(var(--container-bg-color) / .5); */
+        background: var(--container-bg-color);
+        border-radius: 10px;
+        border: 1px solid var(--container-border-color);
+        display: flex;
+        flex-direction: column;
+        min-height: 10rem;
+        max-width: 100%;
+        padding: 1rem; /* move padding here so background fills cell */
+        box-sizing: border-box;
+        height: 100%; /* fill the grid cell */
+        transition: border-color 0.3s;
+         /* background-color: red; */
+    }
+    .container:hover{
+        border: 1px solid var(--container-border-hover-color);
+        transition: border-color 0.3s ease;
+         /* background-color: red; */
+    }
+
+    @media (max-width: 1200px){
+        .container{
+            max-width: 20rem;
+        }
+    }
+</style>

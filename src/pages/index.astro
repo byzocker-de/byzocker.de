@@ -1,116 +1,211 @@
 ---
 import Layout from "../layouts/Layout.astro";
-// import Main from "../components/Main.astro";
-// import Text from "../components/text/Text.astro";
-// import Title from "../components/text/header.astro";
-// import Foot from "../components/text/footer.astro";
-// import Intro from "../components/text/main.astro";
-// import Tabs from "../components/tabs.astro";
+import LinkContainer from "../components/LinkContainer.astro";
+import LinkAction from "../components/LinkAction.astro";
 ---
 
-<!-- <Layout
-  title="byzocker.de"
-  description="hey."
-  image="https://i.imgur.com/HzBwcsH.jpg"
-  url="https://byzocker.de"
-  favico="favicon.svg"
-> -->
 <Layout
-  title="<< tobi >>"
+  title="tobi."
   description="hey."
   image=""
   url="https://byzocker.de"
   favico="favicon.ico"
 >
 <main>
-  <span class="mainspan">
 
-    <span class="textspan">
-        <h1>byzocker</h1>
-        <p>hey.</p>
-    </span>
-    <span class="linksspan">
-      <a href="https://cloud.byzocker.de" target="_blank" rel="noopener">
-        <img src="/icons/nextcloud.svg" alt="Nextcloud" width="30" />
-      </a>
-      <a href="https://instagram.com/byzocker" target="_blank" rel="noopener">
-        <img src="/icons/instagram.svg" alt="Instagram" width="30" />
-      </a>
-      <a href="https://tobiiiiiii.de" target="_blank" rel="noopener">
-        <img src="/icons/link.svg" alt="Website" width="30" />
-      </a>
-    </span>
+  <!-- Header -->
+  <header id="site-header" class="header-byzocker">
+    <p>byzocker</p>
+  </header>
 
-  </span>
+  <div class="content-span">
+    <!-- Content Boxes -->
+    <span id="site-content" class="site-content">
+
+
+      <!-- About me -->
+      <span>
+        <LinkContainer title="about me" isWider={true}>
+          <span class="about-parent">
+            <p>tobi, 18, student, tinkerer</p>
+            <!-- <p>Lorem Ipsum</p> -->
+          </span>
+        </LinkContainer>
+      </span>
+
+
+      <!-- Contact -->
+      <span>
+        <LinkContainer title="contact me" isWider={true}>
+          <span class="contact-parent">
+            <LinkAction href="mailto:tobi@byzocker.de" src="/icons/gmail-cleaner-light.svg" alt="Email Address" label="tobi@byzocker.de" />
+            <LinkAction href="https://matrix.to/#/@tobi:matrix.byzocker.de" src="/icons/matrix-light.svg" alt="Matrix Address" label="@tobi:matrix.byzocker.de" />
+          </span>
+        </LinkContainer>
+      </span>
+
+
+
+      <!-- Profiles -->
+      <span>
+        <LinkContainer title="profiles" isWider={false}>
+          <span class="fourlink-parent">
+            <LinkAction href="https://instagram.com/byzocker" src="/icons/instagram.svg" alt="Instagram" label="@byzocker" />
+            <LinkAction href="https://youtube.com/@byzockerr" src="/icons/youtube.svg" alt="YouTube" label="@byzockerr" />
+            <LinkAction href="https://steamcommunity.com/id/byzocker" src="/icons/steam.svg" alt="Steam" label="/id/byzocker" />
+            <LinkAction href="https://open.spotify.com/user/21fnqjzsgtwz3vf4cethlrezq?si=a42ded0d7c414b4e" src="/icons/spotify.svg" alt="Spotify" label="@byzocker" />
+          </span>
+        </LinkContainer>
+      </span>
+
+
+      <!-- Services -->
+      <span>
+        <LinkContainer title="services" isWider={false}>
+          <span class="fourlink-parent">
+            <LinkAction href="https://chat.byzocker.de/#/login" src="/icons/matrix-light.svg" alt="#" label="Matrix" />
+            <LinkAction href="https://cloud.byzocker.de" src="/icons/nextcloud.svg" alt="#" label="Nextcloud" />
+            <LinkAction href="https://home.byzocker.de" src="/icons/home-assistant-light.svg" alt="#" label="Home Assistant" />
+            <LinkAction href="https://photos.byzocker.de" src="/icons/immich-light.svg" alt="#" label="Immich" />
+          </span>
+        </LinkContainer>
+      </span>
+    </span>
+  </div>
+
+  <footer id="site-footer">
+    <div>
+      <p><a href="https://status.byzocker.de" target='_blank'>service status</a> ● <a href="https://tobiiiiiii.de/" target='_blank'>tobiiiiiii.de</a></p>
+    </div>
+  </footer>
+
 
   <style>
-    :root {
+    /* Mobile-first single-column layout (same on desktop) */
 
+    #site-content {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 80dvh;
+      gap: 1rem;
+      width: min(100%, 40rem);
+      margin: 0 auto;
     }
-    body {
-      font-size: 20px;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-      background-image: url("https://images.unsplash.com/photo-1672009190560-12e7bade8d09?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-      backdrop-filter: blur(50px);
-      background-position: center;
-      background-size: cover;
-      border-radius: 25px;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
+
+    .site-content > * {
+      /* Ensure flex items can shrink on narrow viewports and avoid overflow from long content */
+      min-width: 0;
+      /* background-color: red; */
     }
-    header{
-      margin-bottom: 15px;
+
+    
+    /* Contact Arrangement (2 columns when able, wraps to 1 column when too narrow) */
+    /* 1 2 */
+    .contact-parent {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      gap: .5rem;
     }
-    footer{
-      margin-top: 15px;
-      text-align: center;
+
+    @media (min-width: 1200px) {
+      #site-content {
+        display: grid;
+        grid-template-columns: repeat(3, .75fr);
+        grid-auto-rows: minmax(10rem, auto);
+        justify-items: center;
+        align-items: stretch;
+        width: min(100%, 80rem);
+      }
+
+      #site-content > *:nth-child(1){ grid-column: 2; grid-row: 1; }
+      #site-content > *:nth-child(2){ grid-column: 2; grid-row: 2; }
+      #site-content > *:nth-child(3){ grid-column: 1; grid-row: 1 / span 2; }
+      #site-content > *:nth-child(4){ grid-column: 3; grid-row: 1 / span 2; }
+
+      #site-content > *:nth-child(3) .container,
+      #site-content > *:nth-child(4) .container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* desktop: restore original 2-column layout */
+      .contact-parent {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: repeat(1, 1fr) !important;
+      }
     }
-    /* .mainspan {
+
+    /* Fourlink Arrangement */
+    /* 1 2 
+       3 4 */
+    .fourlink-parent{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: .5rem;
+    }
+
+    .content-span{
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 80dvh;
-    } */
-    .textspan {
-      text-align: center;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      width: auto;
+      /* background-color: yellow; */
       
+    } 
+    .about-parent > p{
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
     }
-    .linksspan {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
+
+
+    /* Header */
+    .header-byzocker{
+      /* color: var(--header-color); */
+      font-family: 'Caveat', cursive;
+      font-size: 7.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 1rem 1rem 5rem 1rem;
+      /* background-color: blue; */
     }
-    h1 {
-      font-size: 5em;
-      margin-bottom: 0.1em;
-      transition: .25s;
+    .header-byzocker > p{
+      margin: 3rem;
     }
-    p {
-      font-size: 1em;
-      margin: 0;
-      transition: .25s;
+
+    footer{
+      display: block;
+      opacity: .7;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 20%;
+      margin-top: auto;
+      position: absolute;
+      width: 100%;
     }
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 3em;
+    footer a{
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1200px){
+      .header-byzocker{
+        font-size: 6rem;
+        margin: 1rem 1rem 4rem 1rem;
       }
-      p {
-        font-size: .5em;
+      .header-byzocker > p{
+        margin: 2rem;
       }
-    }
-    img{
-      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(14deg) brightness(107%) contrast(101%);
+      footer{
+        font-size: 1.25rem;
+        margin-top: 1rem;
+        padding-bottom: 1.5rem;
+      }
     }
   </style>
+
 </main>
 </Layout>
