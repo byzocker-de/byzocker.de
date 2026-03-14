@@ -1,23 +1,47 @@
 ---
 interface Props {
     title?: string;
-    width?: string;
+    isWider?: boolean;
 }
 
-const { title, width = '28rem' } = Astro.props
+let cwidth;
+const { title, isWider} = Astro.props;
+
+if (isWider == true){
+    cwidth = '28rem';
+} else {
+    cwidth = '20rem';
+}
+
+
+
+let width = cwidth;
+
 ---
 
-<div class="container" style={`width: ${width}`}>
+<div id="container" class="container" style={`width: ${width}`}>
     <h2 class="container-title">{title}</h2>
     <div class="container-slot"><slot /></div>
 </div>
 
+<script define:vars={{width}}>
+    // if (window.matchMedia("(max-width: 1200px)").matches) {
+    //     width = '20rem';
+    //     document.getElementById('container').style.width = width;
+    // } else{
+    //     width = cwidth;
+    //     document.getElementById('container').style.width = width;
+    // }
+</script>
 
 
 <style>
+
     .container-title{
         padding-top: 1rem;
         padding-bottom: .5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         font-size: 3rem;
         font-weight: 700;
         text-align: center;
@@ -25,10 +49,10 @@ const { title, width = '28rem' } = Astro.props
     }
     .container-slot{
         text-align: center;
-           flex: 1;
-           display: flex;
-           align-items: center;
-           justify-content: center;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     /* ensure slotted content (e.g. .fourlink-parent) centers vertically */
     .container-slot > * {
@@ -53,5 +77,11 @@ const { title, width = '28rem' } = Astro.props
         border: 1px solid var(--color-5);
         transition: border-color 0.3s ease;
          /* background-color: red; */
+    }
+
+    @media (max-width: 1200px){
+        .container{
+            max-width: 20rem;
+        }
     }
 </style>

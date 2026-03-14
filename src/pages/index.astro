@@ -25,7 +25,7 @@ import LinkAction from "../components/LinkAction.astro";
 
       <!-- About me -->
       <span>
-        <LinkContainer title="about me">
+        <LinkContainer title="about me" isWider={true}>
           <span class="about-parent">
             <p>tobi, 18, student, tinkerer</p>
           </span>
@@ -35,7 +35,7 @@ import LinkAction from "../components/LinkAction.astro";
 
       <!-- Contact -->
       <span>
-        <LinkContainer title="contact me">
+        <LinkContainer title="contact me" isWider={true}>
           <span class="contact-parent">
             <LinkAction href="mailto:tobi@byzocker.de" src="/icons/gmail-cleaner-light.svg" alt="Email Address" label="tobi@byzocker.de" />
             <LinkAction href="https://matrix.to/#/@tobi:matrix.byzocker.de" src="/icons/matrix-light.svg" alt="Matrix Address" label="@tobi:matrix.byzocker.de" />
@@ -47,7 +47,7 @@ import LinkAction from "../components/LinkAction.astro";
 
       <!-- Profiles -->
       <span>
-        <LinkContainer title="profiles" width="20rem">
+        <LinkContainer title="profiles" isWider={false}>
           <span class="fourlink-parent">
             <LinkAction href="https://instagram.com/byzocker" src="/icons/instagram.svg" alt="Instagram" label="@byzocker" />
             <LinkAction href="https://youtube.com/@byzockerr" src="/icons/youtube.svg" alt="YouTube" label="@byzockerr" />
@@ -60,7 +60,7 @@ import LinkAction from "../components/LinkAction.astro";
 
       <!-- Services -->
       <span>
-        <LinkContainer title="services" width="20rem">
+        <LinkContainer title="services" isWider={false}>
           <span class="fourlink-parent">
             <LinkAction href="https://chat.byzocker.de/#/login" src="/icons/matrix-light.svg" alt="#" label="Matrix" />
             <LinkAction href="https://cloud.byzocker.de" src="/icons/nextcloud-light.svg" alt="#" label="Nextcloud" />
@@ -80,56 +80,60 @@ import LinkAction from "../components/LinkAction.astro";
 
 
   <style>
-    /* Grid Arrangements */
+    /* Mobile-first single-column layout (same on desktop) */
 
-    /* Container Arrangements */
-    /* 3  1  4
-       3  2  4 */
-    #site-content{
-      display: grid;
-      grid-template-columns: repeat(3, .75fr);
-      grid-auto-rows: minmax(10rem, auto); /* give each row a baseline height */
-      gap: 1rem;
-      justify-items: center; /* center children horizontally */
-      align-items: stretch;  /* let children stretch vertically to fill row */
-      width: max-content;    /* shrink to fit the grid items */
-      margin: 0 auto;        /* center the grid on the page */
-    }
-    .site-content > *{
-      /* keep wrappers empty so container backgrounds can fill the grid area */
-      /* background-color: red; */
-    }
-    /* make the two spanning containers fill their grid area */
-    #site-content > *:nth-child(3) .container,
-    #site-content > *:nth-child(4) .container{
-      height: 100%;
+    #site-content {
       display: flex;
       flex-direction: column;
-    }
-    #site-content > *:nth-child(1){
-      grid-column: 2;
-      grid-row: 1;
-    }
-    #site-content > *:nth-child(2){
-      grid-column: 2;
-      grid-row: 2;
-    }
-    #site-content > *:nth-child(3){
-      grid-column: 1;
-      grid-row: 1 / span 2;
-    }
-    #site-content > *:nth-child(4){
-      grid-column: 3;
-      grid-row: 1 / span 2;
+      align-items: center;
+      gap: 1rem;
+      width: min(100%, 40rem);
+      margin: 0 auto;
     }
 
-    /* Contact Arrangement */
+    .site-content > * {
+      /* Ensure flex items can shrink on narrow viewports and avoid overflow from long content */
+      min-width: 0;
+      /* background-color: red; */
+    }
+
+    
+    /* Contact Arrangement (2 columns when able, wraps to 1 column when too narrow) */
     /* 1 2 */
-    .contact-parent{
+    .contact-parent {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(1, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
       gap: .5rem;
+    }
+
+    @media (min-width: 1200px) {
+      #site-content {
+        display: grid;
+        grid-template-columns: repeat(3, .75fr);
+        grid-auto-rows: minmax(10rem, auto);
+        justify-items: center;
+        align-items: stretch;
+        width: min(100%, 80rem);
+      }
+
+      #site-content > *:nth-child(1){ grid-column: 2; grid-row: 1; }
+      #site-content > *:nth-child(2){ grid-column: 2; grid-row: 2; }
+      #site-content > *:nth-child(3){ grid-column: 1; grid-row: 1 / span 2; }
+      #site-content > *:nth-child(4){ grid-column: 3; grid-row: 1 / span 2; }
+
+      #site-content > *:nth-child(3) .container,
+      #site-content > *:nth-child(4) .container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* desktop: restore original 2-column layout */
+      .contact-parent {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: repeat(1, 1fr) !important;
+      }
     }
 
     /* Fourlink Arrangement */
@@ -171,7 +175,8 @@ import LinkAction from "../components/LinkAction.astro";
     }
 
     footer{
-      opacity: .75;
+      display: block;
+      opacity: .7;
       text-align: center;
       font-size: 1.5rem;
       font-weight: 400;
@@ -183,21 +188,20 @@ import LinkAction from "../components/LinkAction.astro";
     footer a{
       text-decoration: underline;
     }
-  </style>
-  <style>
-    /* Mobile */
-    @media (max-width: 1000px) {
-      #site-content > *:nth-child(1),
-      #site-content > *:nth-child(2),
-      #site-content > *:nth-child(3),
-      #site-content > *:nth-child(4) {
-        grid-column: 1;
-        grid-row: auto;
+
+    @media (max-width: 1200px){
+      .header-byzocker{
+        font-size: 6rem;
+        margin: 1rem 1rem 4rem 1rem;
       }
-      .container{
-        width: 28rem;
+      .header-byzocker > p{
+        margin: 2rem;
+      }
+      footer{
+        font-size: 1.25rem;
       }
     }
-</style>
+  </style>
+
 </main>
 </Layout>

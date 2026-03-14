@@ -50,7 +50,7 @@ const { title, description, image, url, favico } = Astro.props;
 	/* @import url("https://cdn.jsdelivr.net/gh/ekmas/cs16.css@main/css/cs16.min.css"); https://github.com/ekmas/cs16.css */
 	@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 	:root {
-		overflow: hidden;
+		overflow-x: hidden;
 		/* color-scheme: dark light; */
 		color-scheme: dark light;
 		/*  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#syntax */
@@ -133,6 +133,10 @@ const { title, description, image, url, favico } = Astro.props;
 		}
 		
 	}
-
+	@media (min-width: 1200px){
+		:root{
+			overflow: hidden;
+		}
+	}
 
 </style>
