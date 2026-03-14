@@ -28,6 +28,7 @@ import LinkAction from "../components/LinkAction.astro";
         <LinkContainer title="about me" isWider={true}>
           <span class="about-parent">
             <p>tobi, 18, student, tinkerer</p>
+            <!-- <p>Lorem Ipsum</p> -->
           </span>
         </LinkContainer>
       </span>
@@ -63,7 +64,7 @@ import LinkAction from "../components/LinkAction.astro";
         <LinkContainer title="services" isWider={false}>
           <span class="fourlink-parent">
             <LinkAction href="https://chat.byzocker.de/#/login" src="/icons/matrix-light.svg" alt="#" label="Matrix" />
-            <LinkAction href="https://cloud.byzocker.de" src="/icons/nextcloud-light.svg" alt="#" label="Nextcloud" />
+            <LinkAction href="https://cloud.byzocker.de" src="/icons/nextcloud.svg" alt="#" label="Nextcloud" />
             <LinkAction href="https://home.byzocker.de" src="/icons/home-assistant-light.svg" alt="#" label="Home Assistant" />
             <LinkAction href="https://photos.byzocker.de" src="/icons/immich-light.svg" alt="#" label="Immich" />
           </span>
@@ -152,7 +153,7 @@ import LinkAction from "../components/LinkAction.astro";
       width: auto;
       /* background-color: yellow; */
       
-    }    
+    } 
     .about-parent > p{
       font-size: 2rem;
       text-align: center;
@@ -163,6 +164,7 @@ import LinkAction from "../components/LinkAction.astro";
 
     /* Header */
     .header-byzocker{
+      /* color: var(--header-color); */
       font-family: 'Caveat', cursive;
       font-size: 7.5rem;
       font-weight: 700;
@@ -199,6 +201,8 @@ import LinkAction from "../components/LinkAction.astro";
       }
       footer{
         font-size: 1.25rem;
+        margin-top: 1rem;
+        padding-bottom: 1.5rem;
       }
     }
   </style>

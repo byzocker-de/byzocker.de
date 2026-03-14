@@ -55,29 +55,66 @@ const { title, description, image, url, favico } = Astro.props;
 		color-scheme: dark light;
 		/*  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#syntax */
 
+
+		/* 
+		Color 1: Background
+		Color 2: Container background
+		Color 3: Header color
+		Color 4 Light: Text color, container border hover color, logo color
+		Color 5 Light: Container border color
+		Color 6: 
+
+
+		Dark specific:
+
+		Color 4 Dark:  container border hover color
+		Color 5 Dark: Text color, container border color, logo color
+		*/
+
+
 		/* https://oklch.fyi/color-palettes/olive-garden */		
-		--color-1: oklch(0.24 0.03 115);
+		/* --color-1: oklch(0.24 0.03 115);
 		--color-2: oklch(0.45 0.06 110);
 		--color-3: oklch(0.68 0.07 105);
 		--color-4: oklch(0.85 0.03 95);
 		--color-5: oklch(0.72 0.11 65);
-		--color-6: oklch(0.57 0.13 50);
+		--color-6: oklch(0.57 0.13 50); */
 
 
 
+		/* Diy color, blue-ish themed */
+		/* --color-1: oklch(0.25 0.03 240);
+		--color-2: oklch(0.45 0.06 240);
+		--color-3: oklch(0.68 0.07 240);
+		--color-4: oklch(0.85 0.03 240);
+		--color-5: oklch(0.72 0.13 240);
+		--color-6: oklch(0.80 0.13 236); */
 
 
-		/* https://oklch.fyi/color-palettes/midnight-blue */
-		/* --color-1: oklch(0.25 0.08 250);
-		--color-2: oklch(0.3 0.1 255);
-		--color-3: oklch(0.65 0.12 280);
-		--color-4: oklch(0.4 0.14 265);
-		--color-5: oklch(0.45 0.15 270);
-		--color-6: oklch(0.5 0.16 273);
-		--color-7: oklch(0.55 0.15 275);
-		--color-8: oklch(0.65 0.12 280); */
+		/* Diy color, slate themed (color pallette of https://oklch.fyi/color-palettes/slate) */
+		--color-1: oklch(0.165 0.007 264);
+		--color-2: oklch(0.396 0.016 264);
+		--color-3: oklch(0.932 0.004 256);
+		--color-4: oklch(0.932 0.004 256);
+		--color-5: oklch(0.86 0.008 256);
+		--color-6: oklch(0.80 0.13 236);
 
-		
+
+		/* --color-1: oklch(0.278 0.075 275);
+		--color-2: oklch(0.375 0.128 275);
+		--color-3: oklch(0.375 0.128 275);
+		--color-4: oklch(0.632 0.185 275);
+		--color-5: oklch(0.922 0.063 275);
+		--color-6: oklch(0.85 0.107 275); */
+
+		--bg-color: var(--color-1);
+		/* create a translucent version of --color-2 */
+		--container-bg-color: color-mix(in srgb, var(--color-2) 15%, transparent);
+		--container-border-color: var(--color-5);
+		--container-border-hover-color: var(--color-4);
+		--header-color: var(--color-6);
+		--text-color: var(--color-4);
+		--logo-color: var(--color-4);
 	}
 	html {
 		font-family: Caveat, cursive;
@@ -107,13 +144,9 @@ const { title, description, image, url, favico } = Astro.props;
 	
 	@media (prefers-color-scheme: dark) {
 		:root{
-			--bg-color: var(--color-1);
-			/* create a translucent version of --color-2 */
-			--container-bg-color: color-mix(in srgb, var(--color-2) 15%, transparent);
-			--container-border-color: color-mix(in srgb, var(--color-4), 50%, transparent);
-			--header-color: var(--color-3);
-			--text-color: var(--color-4);
-			--logo-color: var(--color-4);
+			/* --container-border-color: var(--color-5); */
+			--logo-color: var(--color-5);
+			--header-color: var(--color-5);
 		}
 		
 		body {
@@ -138,5 +171,12 @@ const { title, description, image, url, favico } = Astro.props;
 			overflow: hidden;
 		}
 	}
-
+	@media (max-width: 1200px){
+		:root{
+			/* --container-border-color: var(--color-5);
+			--logo-color: var(--color-5);
+			--header-color: var(--color-5); */
+			/* --color-4: var(--color-5);	 */
+		}
+	}
 </style>
