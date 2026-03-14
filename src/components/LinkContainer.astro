@@ -9,7 +9,7 @@ const { title, width = '28rem' } = Astro.props
 
 <div class="container" style={`width: ${width}`}>
     <h2 class="container-title">{title}</h2>
-    <slot class="container-slot" />
+    <div class="container-slot"><slot /></div>
 </div>
 
 
@@ -30,12 +30,28 @@ const { title, width = '28rem' } = Astro.props
            align-items: center;
            justify-content: center;
     }
+    /* ensure slotted content (e.g. .fourlink-parent) centers vertically */
+    .container-slot > * {
+        align-self: center;
+    }
     .container{
+        /* background: rgba(var(--container-bg-color) / .5); */
         background: var(--container-bg-color);
         border-radius: 10px;
-           display: flex;
-           flex-direction: column;
-           min-height: 10rem;
-           max-width: 100%;
+        border: 1px solid var(--color-4);
+        display: flex;
+        flex-direction: column;
+        min-height: 10rem;
+        max-width: 100%;
+        padding: 1rem; /* move padding here so background fills cell */
+        box-sizing: border-box;
+        height: 100%; /* fill the grid cell */
+        transition: border-color 0.3s;
+         /* background-color: red; */
+    }
+    .container:hover{
+        border: 1px solid var(--color-5);
+        transition: border-color 0.3s ease;
+         /* background-color: red; */
     }
 </style>

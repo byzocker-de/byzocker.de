@@ -14,9 +14,9 @@ import LinkAction from "../components/LinkAction.astro";
 <main>
 
   <!-- Header -->
-  <span id="site-header" class="header-byzocker">
+  <header id="site-header" class="header-byzocker">
     <p>byzocker</p>
-  </span>
+  </header>
 
   <div class="content-span">
     <!-- Content Boxes -->
@@ -27,7 +27,7 @@ import LinkAction from "../components/LinkAction.astro";
       <span>
         <LinkContainer title="about me">
           <span class="about-parent">
-            <p>tinkerer, thinker, tobi, 18</p>
+            <p>tobi, 18, tinkerer</p>
           </span>
         </LinkContainer>
       </span>
@@ -37,8 +37,8 @@ import LinkAction from "../components/LinkAction.astro";
       <span>
         <LinkContainer title="contact me">
           <span class="contact-parent">
-            <LinkAction href="#" src="/favicon.ico" alt="Email Address" label="tobi@byzocker.de" />
-            <LinkAction href="#" src="/favicon.ico" alt="Matrix Address" label="@tobi:matrix.byzocker.de" />
+            <LinkAction href="mailto:tobi@byzocker.de" src="/icons/gmail-cleaner-light.svg" alt="Email Address" label="tobi@byzocker.de" />
+            <LinkAction href="https://matrix.to/#/@tobi:matrix.byzocker.de" src="/icons/matrix-light.svg" alt="Matrix Address" label="@tobi:matrix.byzocker.de" />
           </span>
         </LinkContainer>
       </span>
@@ -49,10 +49,10 @@ import LinkAction from "../components/LinkAction.astro";
       <span>
         <LinkContainer title="profiles" width="20rem">
           <span class="fourlink-parent">
-            <LinkAction href="#" src="/icons/instagram.svg" alt="Instagram" label="@byzocker" />
-            <LinkAction href="#" src="/icons/youtube.svg" alt="YouTube" label="@byzocker" />
-            <LinkAction href="#" src="/icons/steam.svg" alt="Steam" label="/id/byzocker" />
-            <LinkAction href="#" src="/icons/spotify.svg" alt="Spotify" label="@byzocker" />
+            <LinkAction href="https://instagram.com/byzocker" src="/icons/instagram.svg" alt="Instagram" label="@byzocker" />
+            <LinkAction href="https://youtube.com/@byzockerr" src="/icons/youtube.svg" alt="YouTube" label="@byzockerr" />
+            <LinkAction href="https://steamcommunity.com/id/byzocker" src="/icons/steam.svg" alt="Steam" label="/id/byzocker" />
+            <LinkAction href="https://open.spotify.com/user/21fnqjzsgtwz3vf4cethlrezq?si=a42ded0d7c414b4e" src="/icons/spotify.svg" alt="Spotify" label="@byzocker" />
           </span>
         </LinkContainer>
       </span>
@@ -62,10 +62,10 @@ import LinkAction from "../components/LinkAction.astro";
       <span>
         <LinkContainer title="services" width="20rem">
           <span class="fourlink-parent">
-            <LinkAction href="#" src="/favicon.ico" alt="#" label="Matrix" />
-            <LinkAction href="#" src="/favicon.ico" alt="#" label="Nextcloud" />
-            <LinkAction href="#" src="/favicon.ico" alt="#" label="Home Assistant" />
-            <LinkAction href="#" src="/favicon.ico" alt="#" label="Immich" />
+            <LinkAction href="https://chat.byzocker.de/#/login" src="/icons/matrix-light.svg" alt="#" label="Matrix" />
+            <LinkAction href="https://cloud.byzocker.de" src="/icons/nextcloud-light.svg" alt="#" label="Nextcloud" />
+            <LinkAction href="https://home.byzocker.de" src="/icons/home-assistant-light.svg" alt="#" label="Home Assistant" />
+            <LinkAction href="https://photos.byzocker.de" src="/icons/immich-light.svg" alt="#" label="Immich" />
           </span>
         </LinkContainer>
       </span>
@@ -73,7 +73,9 @@ import LinkAction from "../components/LinkAction.astro";
   </div>
 
   <footer id="site-footer">
-    <p><a>service status</a></p>
+    <div>
+      <p><a href="https://status.byzocker.de" target='_blank'>service status</a> ● <a href="https://tobiiiiiii.de/" target='_blank'>tobiiiiiii.de</a></p>
+    </div>
   </footer>
 
 
@@ -85,17 +87,24 @@ import LinkAction from "../components/LinkAction.astro";
        3  2  4 */
     #site-content{
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 3px;
+      grid-template-columns: repeat(3, .75fr);
+      grid-auto-rows: minmax(10rem, auto); /* give each row a baseline height */
+      gap: 1rem;
       justify-items: center; /* center children horizontally */
-      align-items: center;   /* center children vertically */
+      align-items: stretch;  /* let children stretch vertically to fill row */
       width: max-content;    /* shrink to fit the grid items */
       margin: 0 auto;        /* center the grid on the page */
     }
     .site-content > *{
-      background-color: red;
-      padding: 1rem;
+      /* keep wrappers empty so container backgrounds can fill the grid area */
+      /* background-color: red; */
+    }
+    /* make the two spanning containers fill their grid area */
+    #site-content > *:nth-child(3) .container,
+    #site-content > *:nth-child(4) .container{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     #site-content > *:nth-child(1){
       grid-column: 2;
@@ -120,7 +129,7 @@ import LinkAction from "../components/LinkAction.astro";
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(1, 1fr);
-      gap: 5px;
+      gap: .5rem;
     }
 
     /* Fourlink Arrangement */
@@ -130,29 +139,48 @@ import LinkAction from "../components/LinkAction.astro";
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(2, 1fr);
-      gap: 5px;
+      gap: .5rem;
     }
 
     .content-span{
       display: flex;
       justify-content: center;
       width: auto;
-      background-color: yellow;
-    }
-
-    .header-byzocker{
-      font-family: 'Caveat', cursive;
-      font-size: 7.5rem;
-      font-weight: 700;
-      text-align: center;
-      padding-top: 1rem;
-    }
-
+      /* background-color: yellow; */
+      
+    }    
     .about-parent > p{
       font-size: 2rem;
       text-align: center;
       margin-top: 0;
       margin-bottom: 0.25rem;
+    }
+
+
+    /* Header */
+    .header-byzocker{
+      font-family: 'Caveat', cursive;
+      font-size: 7.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 1rem 1rem 5rem 1rem;
+      /* background-color: blue; */
+    }
+    .header-byzocker > p{
+      margin: 3rem;
+    }
+
+    footer{
+      opacity: .75;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 20%;
+      margin-top: auto;
+      position: absolute;
+      width: 100%;
+    }
+    footer a{
+      text-decoration: underline;
     }
   </style>
 </main>
