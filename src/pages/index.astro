@@ -27,7 +27,7 @@ import LinkAction from "../components/LinkAction.astro";
       <span>
         <LinkContainer title="about me">
           <span class="about-parent">
-            <p>tobi, 18, tinkerer</p>
+            <p>tobi, 18, student, tinkerer</p>
           </span>
         </LinkContainer>
       </span>
@@ -174,6 +174,7 @@ import LinkAction from "../components/LinkAction.astro";
       opacity: .75;
       text-align: center;
       font-size: 1.5rem;
+      font-weight: 400;
       letter-spacing: 20%;
       margin-top: auto;
       position: absolute;
@@ -183,5 +184,20 @@ import LinkAction from "../components/LinkAction.astro";
       text-decoration: underline;
     }
   </style>
+  <style>
+    /* Mobile */
+    @media (max-width: 1000px) {
+      #site-content > *:nth-child(1),
+      #site-content > *:nth-child(2),
+      #site-content > *:nth-child(3),
+      #site-content > *:nth-child(4) {
+        grid-column: 1;
+        grid-row: auto;
+      }
+      .container{
+        width: 28rem;
+      }
+    }
+</style>
 </main>
 </Layout>

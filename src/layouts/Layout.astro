@@ -52,7 +52,7 @@ const { title, description, image, url, favico } = Astro.props;
 	:root {
 		overflow: hidden;
 		/* color-scheme: dark light; */
-		color-scheme: dark;
+		color-scheme: dark light;
 		/*  https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#syntax */
 
 		/* https://oklch.fyi/color-palettes/olive-garden */		
@@ -64,13 +64,7 @@ const { title, description, image, url, favico } = Astro.props;
 		--color-6: oklch(0.57 0.13 50);
 
 
-		/* Lightmode contender */
-		/* --color-1: oklch(0.95 0.026 259.597);
-		--color-2: oklch(0.803 0.108 259.597);
-		--color-3: oklch(0.657 0.198 259.597);
-		--color-4: oklch(0.51 0.257 259.597);
-		--color-5: oklch(0.364 0.183 259.597);
-		--color-6: oklch(0.217 0.109 259.597); */
+
 
 
 		/* https://oklch.fyi/color-palettes/midnight-blue */
@@ -88,6 +82,7 @@ const { title, description, image, url, favico } = Astro.props;
 	html {
 		font-family: Caveat, cursive;
 		font-size: 16px;
+		font-weight: 500;
 		/* font-family: "Open Sans", sans-serif; */
 	}
 	code {
@@ -114,7 +109,8 @@ const { title, description, image, url, favico } = Astro.props;
 		:root{
 			--bg-color: var(--color-1);
 			/* create a translucent version of --color-2 */
-			--container-bg-color: color-mix(in srgb, var(--color-2) 25%, transparent);
+			--container-bg-color: color-mix(in srgb, var(--color-2) 15%, transparent);
+			--container-border-color: color-mix(in srgb, var(--color-4), 50%, transparent);
 			--header-color: var(--color-3);
 			--text-color: var(--color-4);
 			--logo-color: var(--color-4);
@@ -125,12 +121,18 @@ const { title, description, image, url, favico } = Astro.props;
 			color: var(--text-color);
 		}
 	}
-	/* @media (prefers-color-scheme: light) {
-		body {
-			background-color: var(--color-4);
-			color: var(--color-1);
+	@media (prefers-color-scheme: light) {
+		:root{
+			/* Lightmode contender */
+			--color-1: oklch(0.95 0.026 259.597);
+			--color-2: oklch(0.803 0.108 259.597);
+			--color-3: oklch(0.657 0.198 259.597);
+			--color-4: oklch(0.51 0.257 259.597);
+			--color-5: oklch(0.364 0.183 259.597);
+			--color-6: oklch(0.217 0.109 259.597);
 		}
-	} */
+		
+	}
 
 
 </style>
